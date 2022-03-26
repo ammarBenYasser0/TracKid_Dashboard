@@ -83,6 +83,13 @@ const routes: Routes = [
             (m) => m.AboutUsModule
           ),
       },
+      {
+        path: 'admins',
+        loadChildren: () =>
+          import('./views/pages/admins/admins.module').then(
+            (m) => m.AdminsModule
+          ),
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ],

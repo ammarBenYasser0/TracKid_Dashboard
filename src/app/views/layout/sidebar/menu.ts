@@ -16,6 +16,11 @@ export const MENU: MenuItem[] = [
     link: '/about-us',
   },
   {
+    label: 'مستخدمي لوحة التحكم',
+    icon: 'users',
+    link: '/admins',
+  },
+  {
     label: 'Web Apps',
     isTitle: true,
   },
