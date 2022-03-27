@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { EncryptionService } from './encryption.service';
 import { AuthGuard } from 'src/app/core/guard/auth.guard';
 import { AuthInterceptorService } from '../../../auth-interceptor.service';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 // import { AuthInterceptorService } from './auth-interceptor.service';
 
 const routes: Routes = [
@@ -25,12 +26,16 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
       },
+      {
+        path: 'forget-password',
+        component: ForgetPasswordComponent,
+      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [LoginComponent, AuthComponent],
+  declarations: [LoginComponent, AuthComponent, ForgetPasswordComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

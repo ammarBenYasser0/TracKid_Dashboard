@@ -91,16 +91,25 @@ export class AuthService {
   }
 
   private handleError(err: HttpErrorResponse) {
-    let errMsg = 'unknown error happened';
+    let errMsg = 'حدثت مشكلة غير معروفة';
     if (err.error.message == 'Unauthorized') {
-      errMsg = 'incorrect password';
+      errMsg = 'كلمة المرور غير صحيحة';
     } else if (err.error.message == 'Validation error') {
-      errMsg = "this email doesn't exist";
+      errMsg = 'البريد الإلكتروني غير صحيح';
+    } else if (err.error.message == 'Admin Validation') {
+      errMsg = 'البريد الإلكتروني غير صحيح';
     }
     return throwError(errMsg);
   }
 
-  test() {
-    return this.http.post(`${environment.api}admin/me`, {});
+  forgetPassword(email: string) {
+    let formData = new FormData();
+    formData.append('email', email);
+    return this.http
+      .post<authRes>(`${environment.api}admin/forget-password`, formData)
+      .pipe(catchError(this.handleError));
   }
+  // test() {
+  //   return this.http.post(`${environment.api}admin/me`, {});
+  // }
 }
