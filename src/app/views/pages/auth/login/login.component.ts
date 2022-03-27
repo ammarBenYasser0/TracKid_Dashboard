@@ -20,12 +20,12 @@ export class LoginComponent implements OnInit {
   errMsg = null;
 
   ngOnInit(): void {
-    this.authService.userSubject.subscribe((u) => {
-      console.log(u);
-    });
-    this.authService.test().subscribe((d) => {
-      console.log(d);
-    });
+    // this.authService.userSubject.subscribe((u) => {
+    //   console.log(u);
+    // });
+    // this.authService.test().subscribe((d) => {
+    //   console.log(d);
+    // });
     // this.authService.autoLogin();
   }
 
@@ -34,13 +34,11 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
     const remember = this.loginForm.value.remember;
     this.authService.login(email, password, remember).subscribe(
-      (d) => {
-        console.log(d);
-        this.authService.test().subscribe((d) => {
-          console.log(d);
-        });
-
-        // this.router.navigate(['/dashboard']);
+      () => {
+        // this.authService.test().subscribe((d) => {
+        //   console.log(d);
+        // });
+        this.router.navigate(['/dashboard']);
       },
       (err) => {
         this.errMsg = err;

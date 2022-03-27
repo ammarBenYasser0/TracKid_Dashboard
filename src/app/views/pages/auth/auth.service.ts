@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { authRes } from './authRes.model';
 import { EncryptionService } from './encryption.service';
 import { User } from './user.model';
@@ -23,10 +24,7 @@ export class AuthService {
     formData.append('password', password);
 
     return this.http
-      .post<authRes>(
-        'https://krombo.000webhostapp.com/api/admin/login',
-        formData
-      )
+      .post<authRes>(`${environment.api}admin/login`, formData)
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
@@ -40,10 +38,12 @@ export class AuthService {
       );
   }
 
-  //TODO : interceptor , api at enviroment , header
+  //TODO : interceptor
   logout() {
     this.userSubject.next(null);
     localStorage.removeItem('user');
+    document.cookie =
+      'rememberUser=true; expires = Thu, 01 Jan 1970 00:00:00 GMT';
     this.router.navigate(['/auth/login']);
   }
 
@@ -76,7 +76,6 @@ export class AuthService {
     remember: boolean
   ) {
     const user = new User(email, userId, accessToken);
-    console.log(user);
     this.userSubject.next(user);
     const userJsonData = JSON.stringify(user);
     const userEncryptedData = this.encryptionService.encrypt(userJsonData);
@@ -102,6 +101,6 @@ export class AuthService {
   }
 
   test() {
-    return this.http.post('https://krombo.000webhostapp.com/api/admin/me', {});
+    return this.http.post(`${environment.api}admin/me`, {});
   }
 }
