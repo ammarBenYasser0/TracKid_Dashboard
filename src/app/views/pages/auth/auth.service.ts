@@ -109,7 +109,7 @@ export class AuthService {
       .post<authRes>(`${environment.api}admin/forget-password`, formData)
       .pipe(catchError(this.handleError));
   }
-  // test() {
-  //   return this.http.post(`${environment.api}admin/me`, {});
-  // }
+  test() {
+    return this.http.post(`${environment.api}admin/me`, {});
+  }
 }
