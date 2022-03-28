@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: 'https://krombo.000webhostapp.com/api/',
+  secretKey: 'af1cc4c6ab3fdd5a69b99e46ec4a0cc6',
 };
 
 /*
