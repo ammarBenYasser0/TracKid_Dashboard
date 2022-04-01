@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
-
 import {
   NgbAccordionModule,
   NgbDropdownModule,

@@ -85,20 +85,6 @@ const routes: Routes = [
             (m) => m.GeneralModule
           ),
       },
-      {
-        path: 'about-us',
-        loadChildren: () =>
-          import('./views/pages/about-us/about-us.module').then(
-            (m) => m.AboutUsModule
-          ),
-      },
-      {
-        path: 'admins',
-        loadChildren: () =>
-          import('./views/pages/admins/admins.module').then(
-            (m) => m.AdminsModule
-          ),
-      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ],
