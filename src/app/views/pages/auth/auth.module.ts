@@ -3,14 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { EncryptionService } from './encryption.service';
-import { AuthGuard } from 'src/app/core/guard/auth.guard';
-import { AuthInterceptorService } from '../../../auth-interceptor.service';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-// import { AuthInterceptorService } from './auth-interceptor.service';
 
 const routes: Routes = [
   {
@@ -26,22 +18,12 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
       },
-      {
-        path: 'forget-password',
-        component: ForgetPasswordComponent,
-      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [LoginComponent, AuthComponent, ForgetPasswordComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
-  providers: [AuthService, EncryptionService],
+  declarations: [LoginComponent, AuthComponent],
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class AuthModule {}
