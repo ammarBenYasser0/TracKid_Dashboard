@@ -3,71 +3,37 @@
     <div class="card">
       <div class="row">
         <div class="col-md-4 pe-md-0">
-          <div
-            class="auth-side-wrapper"
-            [ngStyle]="{
-              'background-image': 'url(https://via.placeholder.com/219x452)'
-            }"
-          ></div>
+          <div class="auth-side-wrapper" [ngStyle]="{ 'background-image': 'url(https://via.placeholder.com/219x452)' }">
+
+          </div>
         </div>
         <div class="col-md-8 ps-md-0">
           <div class="auth-form-wrapper px-4 py-5">
-            <a routerLink="." class="nobleui-logo d-block mb-2"
-              >المفتش كورمبو</a
-            >
-            <h5 class="text-muted fw-normal mb-4">تسجيل الدخول إلي حسابك</h5>
-            <form
-              class="forms-sample"
-              [formGroup]="loginForm"
-              (ngSubmit)="onLoggedin()"
-            >
+            <a routerLink="." class="nobleui-logo d-block mb-2">Noble<span>UI</span></a>
+            <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
+            <form class="forms-sample">
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >البريد الإلكتروني</label
-                >
-                <input
-                  formControlName="email"
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  placeholder="Email"
-                />
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value="admin@demo.com">
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >كلمة المرور</label
-                >
-                <input
-                  formControlName="password"
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  autocomplete="current-password"
-                  placeholder="Password"
-                />
-                <a [routerLink]="['/auth/forget-password']"
-                  >نسيت كامة المرور؟</a
-                >
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Password" value="12345678">
               </div>
               <div class="form-check mb-3">
-                <input
-                  formControlName="remember"
-                  type="checkbox"
-                  class="form-check-input"
-                  id="authCheck"
-                />
-                <label class="form-check-label" for="authCheck"> تذكرني </label>
+                <input type="checkbox" class="form-check-input" id="authCheck">
+                <label class="form-check-label" for="authCheck">
+                  Remember me
+                </label>
               </div>
-              <div class="err-container">
-                <button
-                  type="submit"
-                  class="btn btn-primary me-2 mb-2 mb-md-0"
-                  [disabled]="!loginForm.valid"
-                >
-                  تسجيل دخول
+              <div>
+                <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" (click)="onLoggedin($event)">Login</button>
+                <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                  <i class="feather icon-twitter btn-icon-prepend"></i>
+                  Login with twitter
                 </button>
-                <div *ngIf="errMsg" class="err">{{ errMsg }}</div>
               </div>
+              <a routerLink="/auth/register" class="d-block mt-3 text-muted">Not a user? Sign up</a>
             </form>
           </div>
         </div>

@@ -1,48 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
 
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', Validators.required),
-    remember: new FormControl(),
-  });
-  errMsg = null;
+  returnUrl: any;
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.authService.userSubject.subscribe((u) => {
-    //   console.log(u);
-    // });
-    // this.authService.test().subscribe((d) => {
-    //   console.log(d);
-    // });
-    // this.authService.autoLogin();
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  onLoggedin() {
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
-    const remember = this.loginForm.value.remember;
-    this.authService.login(email, password, remember).subscribe(
-      () => {
-        // this.authService.test().subscribe((d) => {
-        //   console.log(d);
-        // });
-        this.router.navigate(['/dashboard']);
-      },
-      (err) => {
-        this.errMsg = err;
-      }
-    );
+  onLoggedin(e: Event) {
+    e.preventDefault();
+    localStorage.setItem('isLoggedin', 'true');
+    if (localStorage.getItem('isLoggedin')) {
+      this.router.navigate([this.returnUrl]);
+    }
   }
+
 }
