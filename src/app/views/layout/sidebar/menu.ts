@@ -3,16 +3,11 @@ import { MenuItem } from './menu.model';
 export const MENU: MenuItem[] = [
   {
     label: 'Main',
-<<<<<<< HEAD
     isTitle: true,
-=======
-    isTitle: true
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Dashboard',
     icon: 'home',
-<<<<<<< HEAD
     link: '/dashboard',
   },
   {
@@ -36,23 +31,6 @@ export const MENU: MenuItem[] = [
   {
     label: 'Web Apps',
     isTitle: true,
-=======
-    link: '/dashboard'
-  },
-  {
-    label: 'الأسئلة الشائعة',
-    icon: 'help-circle',
-    link: '/general/faq'
-  },
-  {
-    label: 'المستخدمين',
-    icon: 'users',
-    link: '/general/users'
-  },
-  {
-    label: 'Web Apps',
-    isTitle: true
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Email',
@@ -64,7 +42,6 @@ export const MENU: MenuItem[] = [
       },
       {
         label: 'Read',
-<<<<<<< HEAD
         link: '/apps/email/read',
       },
       {
@@ -72,15 +49,6 @@ export const MENU: MenuItem[] = [
         link: '/apps/email/compose',
       },
     ],
-=======
-        link: '/apps/email/read'
-      },
-      {
-        label: 'Compose',
-        link: '/apps/email/compose'
-      },
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Chat',
@@ -94,19 +62,11 @@ export const MENU: MenuItem[] = [
     badge: {
       variant: 'primary',
       text: 'Event',
-<<<<<<< HEAD
     },
   },
   {
     label: 'Components',
     isTitle: true,
-=======
-    }
-  },
-  {
-    label: 'Components',
-    isTitle: true
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'UI Kit',
@@ -212,11 +172,7 @@ export const MENU: MenuItem[] = [
         label: 'Typeadhed',
         link: '/ui-components/typeahead',
       },
-<<<<<<< HEAD
     ],
-=======
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Advanced UI',
@@ -234,11 +190,7 @@ export const MENU: MenuItem[] = [
         label: 'Sweet alert',
         link: '/advanced-ui/sweet-alert',
       },
-<<<<<<< HEAD
     ],
-=======
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Forms',
@@ -246,18 +198,13 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         label: 'Basic elements',
-<<<<<<< HEAD
         link: '/form-elements/basic-elements',
-=======
-        link: '/form-elements/basic-elements'
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
       },
       {
         label: 'Advanced elements',
         subItems: [
           {
             label: 'Form validation',
-<<<<<<< HEAD
             link: '/advanced-form-elements/form-validation',
           },
           {
@@ -291,41 +238,6 @@ export const MENU: MenuItem[] = [
         link: '/form-elements/wizard',
       },
     ],
-=======
-            link: '/advanced-form-elements/form-validation'
-          },
-          {
-            label: 'Input mask',
-            link: '/advanced-form-elements/input-mask'
-          },
-          {
-            label: 'Ng-select',
-            link: '/advanced-form-elements/ng-select'
-          },
-          {
-            label: 'Ngx-chips',
-            link: '/advanced-form-elements/ngx-chips'
-          },
-          {
-            label: 'Ngx-color-picker',
-            link: '/advanced-form-elements/ngx-color-picker'
-          },
-          {
-            label: 'Ngx-dropzone',
-            link: '/advanced-form-elements/ngx-dropzone-wrapper'
-          },
-        ]
-      },
-      {
-        label: 'Editors',
-        link: '/form-elements/editors'
-      },
-      {
-        label: 'Wizard',
-        link: '/form-elements/wizard'
-      },
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Charts & graphs',
@@ -339,11 +251,7 @@ export const MENU: MenuItem[] = [
         label: 'ChartJs',
         link: '/charts-graphs/chartjs',
       },
-<<<<<<< HEAD
     ],
-=======
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Tables',
@@ -359,15 +267,9 @@ export const MENU: MenuItem[] = [
       },
       {
         label: 'Ngx-datatable',
-<<<<<<< HEAD
         link: '/tables/ngx-datatable',
       },
     ],
-=======
-        link: '/tables/ngx-datatable'
-      }
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Icons',
@@ -380,21 +282,12 @@ export const MENU: MenuItem[] = [
       {
         label: 'Mdi icons',
         link: '/icons/mdi-icons',
-<<<<<<< HEAD
       },
     ],
   },
   {
     label: 'Pages',
     isTitle: true,
-=======
-      }
-    ]
-  },
-  {
-    label: 'Pages',
-    isTitle: true
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Special pages',
@@ -409,13 +302,6 @@ export const MENU: MenuItem[] = [
         link: '/general/faq',
       },
       {
-<<<<<<< HEAD
-=======
-        label: 'users',
-        link: '/general/users',
-      },
-      {
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
         label: 'Invoice',
         link: '/general/invoice',
       },
@@ -430,13 +316,8 @@ export const MENU: MenuItem[] = [
       {
         label: 'Timeline',
         link: '/general/timeline',
-<<<<<<< HEAD
       },
     ],
-=======
-      }
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Authentication',
@@ -450,11 +331,7 @@ export const MENU: MenuItem[] = [
         label: 'Register',
         link: '/auth/register',
       },
-<<<<<<< HEAD
     ],
-=======
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
   {
     label: 'Error',
@@ -468,10 +345,6 @@ export const MENU: MenuItem[] = [
         label: '500',
         link: '/error/500',
       },
-<<<<<<< HEAD
     ],
-=======
-    ]
->>>>>>> 874d03440757be2b48b5b10f97a28a54e6c9cc6d
   },
 ];
