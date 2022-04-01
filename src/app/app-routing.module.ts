@@ -23,6 +23,15 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'cases',
+        loadChildren: () =>
+          import('./views/pages/cases/cases.module').then(
+            (m) => m.CasesModule
+          ),
+      },
+
+      
+      {
         path: 'ui-components',
         loadChildren: () =>
           import('./views/pages/ui-components/ui-components.module').then(

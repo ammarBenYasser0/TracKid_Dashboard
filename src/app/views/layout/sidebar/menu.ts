@@ -20,6 +20,14 @@ export const MENU: MenuItem[] = [
     icon: 'users',
     link: '/admins',
   },
+
+  {
+    label: 'الحالات',
+    icon: 'users',
+    link: '/cases',
+  },
+
+
   {
     label: 'Web Apps',
     isTitle: true,

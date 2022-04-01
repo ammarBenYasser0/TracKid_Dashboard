@@ -47,30 +47,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.authService.test().subscribe(res=>{
+   
 
-      console.log(res);
-      
-    });
-
-
-    let myHeaders :Headers = new Headers();
-    myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wva3JvbWJvLjAwMHdlYmhvc3RhcHAuY29tXC9hcGlcL2FkbWluXC9sb2dpbiIsImlhdCI6MTY0ODQ5MDI1MSwibmJmIjoxNjQ4NDkwMjUxLCJqdGkiOiJwWnFZN3c4ZDUxNEdhckN0Iiwic3ViIjoyLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.P5QJmu96ZqY1rzKZrx2uJsII1CmA68_YBpHTuNeyjx8");
-
-/* let requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  redirect: 'follow'
-}; */
-
-fetch("https://krombo.000webhostapp.com/api/admin/me", {
-  method: 'POST',
-  headers: myHeaders,
-  redirect: 'follow'
-})
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+   
 
     this.currentDate = this.calendar.getToday();
 
