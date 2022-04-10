@@ -1,12 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { authRes } from './authRes.model';
-import { EncryptionService } from './encryption.service';
-import { User } from './user.model';
+import { authRes } from '../models/authRes.model';
+import { EncryptionService } from '../services/encryption.service';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +20,17 @@ export class AuthService {
     private router: Router
   ) {}
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      content: 'application/json',
+      Accept: '*/*',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Credentials': 'true',
+    }),
+  };
+  // TODO: try after finishing
   userSubject = new BehaviorSubject<User | null>(null);
 
   login(email: string, password: string, remember: boolean) {
@@ -24,7 +39,11 @@ export class AuthService {
     formData.append('password', password);
 
     return this.http
-      .post<authRes>(`${environment.api}admin/login`, formData)
+      .post<authRes>(
+        `${environment.api}admin/login`,
+        formData
+        // this.httpOptions
+      )
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
@@ -109,7 +128,12 @@ export class AuthService {
       .post<authRes>(`${environment.api}admin/forget-password`, formData)
       .pipe(catchError(this.handleError));
   }
-  test() {
-    return this.http.post(`${environment.api}admin/me`, {});
-  }
+
+  // test() {
+  //   return this.http.post(
+  //     `${environment.api}admin/me`,
+  //     { test: 'test' },
+  //     httpOptions
+  //   );
+  // }
 }
