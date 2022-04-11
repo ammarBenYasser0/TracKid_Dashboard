@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { EncryptionService } from '../../auth/encryption.service';
+import { EncryptionService } from '../../auth/services/encryption.service';
  
 @Injectable({
   providedIn: 'root'
@@ -64,7 +64,7 @@ export class CasesService {
 
   GetAllkidsByIndex(limit:number=10,offset:number=0)  {
      
-    return this.http.get<any>(this.appRoot + `admin/kids/index`,this.httpOptions).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/index`).pipe(
       tap((data:any) => {
 
    
