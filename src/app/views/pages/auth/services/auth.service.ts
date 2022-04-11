@@ -1,12 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { authRes } from './authRes.model';
-import { EncryptionService } from './encryption.service';
-import { User } from './user.model';
+import { authRes } from '../models/authRes.model';
+import { EncryptionService } from '../services/encryption.service';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +20,7 @@ export class AuthService {
     private router: Router
   ) {}
 
+  // TODO: try after finishing
   userSubject = new BehaviorSubject<User | null>(null);
 
   login(email: string, password: string, remember: boolean) {
@@ -24,7 +29,11 @@ export class AuthService {
     formData.append('password', password);
 
     return this.http
-      .post<authRes>(`${environment.api}admin/login`, formData)
+      .post<authRes>(
+        `${environment.api}admin/login`,
+        formData
+        // this.httpOptions
+      )
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
@@ -84,7 +93,7 @@ export class AuthService {
       document.cookie =
         'rememberUser=true; expires=Fri, 31 Dec 9999 23:59:59 GMT ';
     } else {
-      var date = new Date();
+      let date = new Date();
       date.setTime(date.getTime() + 120 * 60 * 1000);
       document.cookie = `rememberUser=true; expires=${date.toUTCString()}`;
     }
@@ -103,13 +112,20 @@ export class AuthService {
   }
 
   forgetPassword(email: string) {
-    let formData = new FormData();
-    formData.append('email', email);
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('email', email);
     return this.http
-      .post<authRes>(`${environment.api}admin/forget-password`, formData)
+      .get<authRes>(`${environment.api}admin/forget-password`, {
+        params: queryParams,
+      })
       .pipe(catchError(this.handleError));
   }
+
   test() {
-    return this.http.post(`${environment.api}admin/me`, {});
+    // let queryParams = new HttpParams();
+    // queryParams = queryParams.append('user_auth_id', 2);
+    return this.http.get<any>(`${environment.api}admin/me`, {
+      // params: queryParams,
+    });
   }
 }

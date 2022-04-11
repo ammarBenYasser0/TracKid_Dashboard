@@ -5,8 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { EncryptionService } from './encryption.service';
+import { AuthService } from './services/auth.service';
+import { EncryptionService } from './services/encryption.service';
 import { AuthGuard } from 'src/app/core/guard/auth.guard';
 import { AuthInterceptorService } from '../../../auth-interceptor.service';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
@@ -42,6 +42,14 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthService, EncryptionService],
+  providers: [
+    AuthService,
+    EncryptionService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptorService,
+    //   multi: true,
+    // },
+  ],
 })
 export class AuthModule {}
