@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { EncryptionService } from '../../auth/services/encryption.service';
  
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,53 @@ export class CasesService {
   appRoot:string = environment.api;  
   constructor(
     private http: HttpClient,
- 
+    private encryptionService: EncryptionService,
     private router: Router 
   ) { }
+   userEncryptedData = localStorage.getItem('user') || '';
+   userDecryptedData = this.encryptionService.decrypt(this.userEncryptedData);
+   currentUser = JSON.parse(this.userDecryptedData);
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"),
+      'Accept': '*/*',
+      'Access-Control-Allow-Origin' :'*',
+      'Content-Length':'600',
+      "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT",
+      'Access-Control-Allow-Headers':'X-Requested-With,content-type',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  }
+ 
+  test()  {
+     
+    return this.http.post<any>(this.appRoot + `admin/me`,{tes:'ss'},this.httpOptions).pipe(
+      tap((data:any) => {
+        
+   
+        
 
+      }),
+      map((data) => data),
+      catchError(this.handleError)  
+      )  
+  }
 
+  test2()  {
+     
+    return this.http.post<any>(this.appRoot + `admin/me`,{}).pipe(
+      tap((data:any) => {
+        
+   
+        
+
+      }),
+      map((data) => data),
+      catchError(this.handleError)  
+      )  
+  }
 
   GetAllkidsByIndex(limit:number=10,offset:number=0)  {
      

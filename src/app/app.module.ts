@@ -26,14 +26,15 @@ import { AuthInterceptorService } from './auth-interceptor.service';
     HttpClientModule,
   ],
   providers: [
-    AuthGuard,
-    AuthService,
-    EncryptionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true,
     },
+    AuthGuard,
+    AuthService,
+    EncryptionService,
+
     {
       provide: HIGHLIGHT_OPTIONS, // https://www.npmjs.com/package/ngx-highlightjs
       useValue: {
