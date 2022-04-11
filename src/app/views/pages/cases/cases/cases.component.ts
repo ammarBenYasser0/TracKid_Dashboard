@@ -62,6 +62,10 @@ export class CasesComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     // this.aboutUsService.getContent();
    /*  this.getData() */
+   this._casesService.test().subscribe(res=>{
+     console.log(res);
+     
+   })
   }
 
   changePage(e:any){

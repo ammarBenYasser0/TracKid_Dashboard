@@ -27,7 +27,16 @@ export class AuthInterceptorService implements HttpInterceptor {
     console.log('From Interseptor', `Bearer ${currentUser._accessToken}`);
 
     request = request.clone({
-      setHeaders: { Authorization: `Bearer ${currentUser._accessToken}` },
+
+      setHeaders: {
+        'content': 'application/json',
+         Authorization: `Bearer ${currentUser._accessToken}`,
+         'Accept': '*/*',
+         'Access-Control-Allow-Origin' :'*',
+         "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT",
+         'Access-Control-Allow-Headers':'X-Requested-With,content-type',
+         'Access-Control-Allow-Credentials': 'true'
+     },
     });
 
     return next.handle(request);

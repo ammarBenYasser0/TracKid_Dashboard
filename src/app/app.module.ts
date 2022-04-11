@@ -29,7 +29,7 @@ import { AuthInterceptorService } from './auth-interceptor.service';
     AuthGuard,
     AuthService,
     EncryptionService,
-   /*  {
+    /* {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true,
