@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: BaseComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -25,12 +25,9 @@ const routes: Routes = [
       {
         path: 'cases',
         loadChildren: () =>
-          import('./views/pages/cases/cases.module').then(
-            (m) => m.CasesModule
-          ),
+          import('./views/pages/cases/cases.module').then((m) => m.CasesModule),
       },
 
-      
       {
         path: 'ui-components',
         loadChildren: () =>
