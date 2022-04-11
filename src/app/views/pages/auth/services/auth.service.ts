@@ -1,7 +1,7 @@
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpHeaders,
+  HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -20,16 +20,6 @@ export class AuthService {
     private router: Router
   ) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      content: 'application/json',
-      Accept: '*/*',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Credentials': 'true',
-    }),
-  };
   // TODO: try after finishing
   userSubject = new BehaviorSubject<User | null>(null);
 
@@ -103,7 +93,7 @@ export class AuthService {
       document.cookie =
         'rememberUser=true; expires=Fri, 31 Dec 9999 23:59:59 GMT ';
     } else {
-      var date = new Date();
+      let date = new Date();
       date.setTime(date.getTime() + 120 * 60 * 1000);
       document.cookie = `rememberUser=true; expires=${date.toUTCString()}`;
     }
@@ -122,18 +112,20 @@ export class AuthService {
   }
 
   forgetPassword(email: string) {
-    let formData = new FormData();
-    formData.append('email', email);
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('email', email);
     return this.http
-      .post<authRes>(`${environment.api}admin/forget-password`, formData)
+      .get<authRes>(`${environment.api}admin/forget-password`, {
+        params: queryParams,
+      })
       .pipe(catchError(this.handleError));
   }
 
-  // test() {
-  //   return this.http.post(
-  //     `${environment.api}admin/me`,
-  //     { test: 'test' },
-  //     httpOptions
-  //   );
-  // }
+  test() {
+    // let queryParams = new HttpParams();
+    // queryParams = queryParams.append('user_auth_id', 2);
+    return this.http.get<any>(`${environment.api}admin/me`, {
+      // params: queryParams,
+    });
+  }
 }

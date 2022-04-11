@@ -20,12 +20,6 @@ export class LoginComponent implements OnInit {
   errMsg = null;
 
   ngOnInit(): void {
-    // this.authService.userSubject.subscribe((u) => {
-    //   console.log(u);
-    // });
-    // this.authService.test().subscribe((d) => {
-    //   console.log(d);
-    // });
     // this.authService.autoLogin();
   }
 
@@ -43,9 +37,9 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // testapi() {
-  //   this.authService.test().subscribe((d) => {
-  //     console.log(d);
-  //   });
-  // }
+  testapi() {
+    this.authService.test().subscribe((d) => {
+      console.log(d);
+    });
+  }
 }

@@ -42,6 +42,14 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthService, EncryptionService],
+  providers: [
+    AuthService,
+    EncryptionService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptorService,
+    //   multi: true,
+    // },
+  ],
 })
 export class AuthModule {}
