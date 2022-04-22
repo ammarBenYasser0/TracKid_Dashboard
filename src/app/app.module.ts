@@ -15,6 +15,7 @@ import { AuthService } from './views/pages/auth/services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EncryptionService } from './views/pages/auth/services/encryption.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent],
@@ -24,6 +25,7 @@ import { AuthInterceptorService } from './auth-interceptor.service';
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
+    HotToastModule.forRoot(),
   ],
   providers: [
     {
