@@ -20,6 +20,26 @@ export const MENU: MenuItem[] = [
     icon: 'users',
     link: '/general/users'
   },
+<<<<<<< origin/mahmoud
+=======
+
+  {
+    label: 'الحالات',
+    icon: 'users',
+    link: '/cases',
+  },
+  {
+    label: 'الأسئلة الشائعة',
+    icon: 'help-circle',
+    link: '/general/faq'
+  },
+  {
+    label: 'المستخدمين',
+    icon: 'users',
+    link: '/general/users'
+  },
+
+>>>>>>> local
   {
     label: 'Web Apps',
     isTitle: true

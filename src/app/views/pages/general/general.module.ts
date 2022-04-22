@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
 import { FormsModule } from '@angular/forms';
+<<<<<<< origin/mahmoud
+=======
+
+>>>>>>> local
 import {
   NgbAccordionModule,
   NgbDropdownModule,
@@ -50,7 +54,11 @@ const routes: Routes = [
     NgbAccordionModule,
     NgbDropdownModule,
     NgbTooltipModule,
+<<<<<<< origin/mahmoud
     FormsModule
+=======
+    FormsModule,
+>>>>>>> local
   ],
 })
 export class GeneralModule {}

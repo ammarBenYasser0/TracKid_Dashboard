@@ -11,7 +11,15 @@ import { AppComponent } from './app.component';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
 
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+<<<<<<< origin/mahmoud
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+=======
+import { AuthService } from './views/pages/auth/services/auth.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EncryptionService } from './views/pages/auth/services/encryption.service';
+import { AuthInterceptorService } from './auth-interceptor.service';
+import { HotToastModule } from '@ngneat/hot-toast';
+>>>>>>> local
 
 @NgModule({
   declarations: [
@@ -23,7 +31,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
+<<<<<<< origin/mahmoud
     HttpClientModule
+=======
+    HttpClientModule,
+    HotToastModule.forRoot(),
+>>>>>>> local
   ],
   providers: [
     AuthGuard,
