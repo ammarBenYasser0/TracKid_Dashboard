@@ -26,7 +26,16 @@ export const MENU: MenuItem[] = [
     icon: 'users',
     link: '/cases',
   },
-
+  {
+    label: 'الأسئلة الشائعة',
+    icon: 'help-circle',
+    link: '/general/faq'
+  },
+  {
+    label: 'المستخدمين',
+    icon: 'users',
+    link: '/general/users'
+  },
 
   {
     label: 'Web Apps',
