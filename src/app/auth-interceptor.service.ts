@@ -21,13 +21,13 @@ export class AuthInterceptorService implements HttpInterceptor {
     const userDecryptedData = this.encryptionService.decrypt(userEncryptedData);
     const currentUser = JSON.parse(userDecryptedData);
 
-    console.log('From Interseptor', `userId ${currentUser.userId}`);
-
-    let queryParams = new HttpParams();
-    queryParams = queryParams.append('user_auth_id', currentUser.userId);
+    let newQueryParams = request.params.append(
+      'user_auth_id',
+      currentUser.userId
+    );
 
     request = request.clone({
-      params: queryParams,
+      params: newQueryParams,
     });
 
     return next.handle(request);
