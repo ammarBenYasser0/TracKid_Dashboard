@@ -51,8 +51,7 @@ export class AdminsService {
     name: string,
     email: string,
     password: string,
-    passwordConfirmation: string,
-    id: number
+    passwordConfirmation: string
   ) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('email', email);

@@ -34,14 +34,14 @@ export class AdminTableComponent implements OnInit {
   lastPage: number;
   collectionSize = this.admins.length;
 
+  // ---------------- ADD MODAL ----------------
+
   addAdminForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', Validators.required),
     passwordConfirmation: new FormControl('', Validators.required),
   });
-
-  // ---------------- ADD MODAL ----------------
 
   onAddPasswordChange() {
     if (this.addPasswordConfirmation.value == this.addPassword.value) {
@@ -51,6 +51,8 @@ export class AdminTableComponent implements OnInit {
     }
   }
 
+  // TODO: find another way for this
+
   get addPassword(): AbstractControl {
     return this.addAdminForm.controls['password'];
   }
@@ -59,10 +61,7 @@ export class AdminTableComponent implements OnInit {
     return this.addAdminForm.controls['passwordConfirmation'];
   }
 
-  openModal(content: TemplateRef<any>, adminId = null) {
-    if (adminId) {
-      this.toBeEditedAdmin = adminId;
-    }
+  openModal(content: TemplateRef<any>) {
     this.modalService.open(content, { centered: true });
   }
 
@@ -92,7 +91,7 @@ export class AdminTableComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // ---------------- TABLE ----------------
+  // ---------------- EDIT MODAL ----------------
 
   editAdminForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -100,8 +99,6 @@ export class AdminTableComponent implements OnInit {
     password: new FormControl('', Validators.required),
     passwordConfirmation: new FormControl('', Validators.required),
   });
-
-  toBeEditedAdmin: number;
 
   onEditPasswordChange() {
     if (this.editPasswordConfirmation.value == this.editPassword.value) {
@@ -111,6 +108,8 @@ export class AdminTableComponent implements OnInit {
     }
   }
 
+  // TODO: find another way for this
+
   get editPassword(): AbstractControl {
     return this.addAdminForm.controls['password'];
   }
@@ -119,13 +118,31 @@ export class AdminTableComponent implements OnInit {
     return this.addAdminForm.controls['passwordConfirmation'];
   }
 
-  refreshCountries() {
-    console.log('page test');
+  closeEditAdmin() {
+    const name = this.editAdminForm.value.name;
+    const email = this.editAdminForm.value.email;
+    const password = this.editAdminForm.value.password;
+    const passwordConfirmation = this.editAdminForm.value.passwordConfirmation;
+
+    this.adminsService
+      .updateAdmin(name, email, password, passwordConfirmation)
+      .subscribe((resData) => {
+        this.toastService.success(resData.message);
+        this.refreshAdmins();
+      });
+    this.modalService.dismissAll();
   }
 
-  refreshAdmins() {
-    this.adminsService.getAdmins().subscribe((resData) => {
+  // ---------------- TABLE ----------------
+
+  refreshCountries(page: number) {
+    this.refreshAdmins(page);
+  }
+
+  refreshAdmins(page: number = 1) {
+    this.adminsService.getAdmins(page).subscribe((resData) => {
       this.admins = resData.data.data;
+
       this.lastPage = resData.data.last_page;
       this.pageSize = resData.data.per_page;
       this.collectionSize = this.pageSize * this.lastPage;
@@ -137,26 +154,5 @@ export class AdminTableComponent implements OnInit {
       this.toastService.success(resData.message);
       this.refreshAdmins();
     });
-  }
-
-  closeEditAdmin() {
-    const name = this.editAdminForm.value.name;
-    const email = this.editAdminForm.value.email;
-    const password = this.editAdminForm.value.password;
-    const passwordConfirmation = this.editAdminForm.value.passwordConfirmation;
-
-    this.adminsService
-      .updateAdmin(
-        name,
-        email,
-        password,
-        passwordConfirmation,
-        this.toBeEditedAdmin
-      )
-      .subscribe((resData) => {
-        this.toastService.success(resData.message);
-        this.refreshAdmins();
-      });
-    this.modalService.dismissAll();
   }
 }
