@@ -3,7 +3,10 @@
     <div class="card">
       <div class="card-body">
         <h1 class="d-inline-block">مستخدمين لوحة التحكم</h1>
-        <button class="btn btn-primary ms-3 mb-3" (click)="openModal(addModal)">
+        <button
+          class="btn btn-primary ms-3 mb-3"
+          (click)="openModal(addModal, 0)"
+        >
           إضافة
           <i class="feather icon-plus-circle"></i>
         </button>
@@ -19,7 +22,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let admin of admins; let i = index">
+              <tr
+                *ngFor="let admin of admins; let i = index"
+                class="row-center"
+              >
                 <td>{{ i + 1 }}</td>
                 <td>{{ admin.name }}</td>
                 <td>{{ admin.email }}</td>
@@ -27,7 +33,7 @@
                   <button
                     type="button"
                     class="btn btn-primary mb-1 mb-md-0"
-                    (click)="openModal(editModal)"
+                    (click)="openModal(editModal, admin.id)"
                   >
                     تعديل
                     <i class="feather icon-edit-3"></i>
@@ -200,7 +206,7 @@
       class="btn btn-primary"
       (click)="closeEditAdmin()"
     >
-      إضافة
+      تعديل
     </button>
   </div>
 </ng-template>

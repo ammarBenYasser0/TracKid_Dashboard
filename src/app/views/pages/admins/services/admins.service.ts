@@ -51,7 +51,8 @@ export class AdminsService {
     name: string,
     email: string,
     password: string,
-    passwordConfirmation: string
+    passwordConfirmation: string,
+    id: number
   ) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('email', email);
@@ -63,8 +64,10 @@ export class AdminsService {
     queryParams = queryParams.append('name', name);
     queryParams = queryParams.append('permission_id', 2);
 
+    // TODO : admin id
+
     return this.http.get<AdminOpRes>(
-      `${environment.api}admin/dashboard/update/9`,
+      `${environment.api}admin/dashboard/update/${id}`,
       {
         params: queryParams,
       }

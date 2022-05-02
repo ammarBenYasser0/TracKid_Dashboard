@@ -33,6 +33,7 @@ export class AdminTableComponent implements OnInit {
   pageSize: number;
   lastPage: number;
   collectionSize = this.admins.length;
+  editAdminId: any;
 
   // ---------------- ADD MODAL ----------------
 
@@ -61,7 +62,10 @@ export class AdminTableComponent implements OnInit {
     return this.addAdminForm.controls['passwordConfirmation'];
   }
 
-  openModal(content: TemplateRef<any>) {
+  openModal(content: TemplateRef<any>, adminId: number) {
+    if (adminId) {
+      this.editAdminId = adminId;
+    }
     this.modalService.open(content, { centered: true });
   }
 
@@ -88,6 +92,7 @@ export class AdminTableComponent implements OnInit {
           this.toastService.error('حدث خطأ ما');
         }
       );
+    this.addAdminForm.reset();
     this.modalService.dismissAll();
   }
 
@@ -125,7 +130,13 @@ export class AdminTableComponent implements OnInit {
     const passwordConfirmation = this.editAdminForm.value.passwordConfirmation;
 
     this.adminsService
-      .updateAdmin(name, email, password, passwordConfirmation)
+      .updateAdmin(
+        name,
+        email,
+        password,
+        passwordConfirmation,
+        this.editAdminId
+      )
       .subscribe((resData) => {
         this.toastService.success(resData.message);
         this.refreshAdmins();
