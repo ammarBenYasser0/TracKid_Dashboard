@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
 import { FormsModule } from '@angular/forms';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   NgbAccordionModule,
@@ -15,6 +16,8 @@ import { BlankComponent } from './blank/blank.component';
 import { FaqComponent } from './faq/faq.component';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
+import { SearchPipe } from './pipe/search.pipe';
+// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 const routes: Routes = [
   {
@@ -43,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [GeneralComponent, BlankComponent, FaqComponent, UsersComponent],
+  declarations: [GeneralComponent, BlankComponent, FaqComponent, UsersComponent, SearchPipe],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -52,6 +55,7 @@ const routes: Routes = [
     NgbDropdownModule,
     NgbTooltipModule,
     FormsModule,
+    NgbPaginationModule
   ],
 })
 export class GeneralModule {}
