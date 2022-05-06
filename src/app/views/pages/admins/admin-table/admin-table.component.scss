@@ -1,0 +1,15 @@
+.ng-invalid.ng-touched:not(form) {
+    border-right: 5px solid #a94442; /* red */
+  }
+
+  .err {
+    padding: 8px;
+    background-color: rgba(211, 16, 16, 0.15);
+    border: solid rgb(211, 16, 16) 1px;
+    color: rgb(211, 16, 16);
+    border-radius: 4px;
+  }
+
+  .row-center{
+    vertical-align: baseline;
+  }
