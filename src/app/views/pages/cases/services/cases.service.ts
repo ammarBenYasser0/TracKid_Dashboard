@@ -36,7 +36,7 @@ export class CasesService {
  
   test()  {
      
-    return this.http.post<any>(this.appRoot + `admin/me`,{tes:'ss'},this.httpOptions).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=1`).pipe(
       tap((data:any) => {
         
    
