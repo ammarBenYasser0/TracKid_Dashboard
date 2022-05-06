@@ -1,0 +1,26 @@
+.custom-font-weight{
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+.second-cel{
+    border-left: 2px solid grey;
+}
+/* .first-cel{
+    border: 1px solid rgb(151, 150, 150);
+    border-radius: 5px;
+} */
+.kidInfo{
+    height: fit-content;
+    display: block;
+    label{
+        font-size: 22px;
+        font-weight: 700;
+    }
+    p{
+        font-size: 20px;
+        font-weight: 500;  
+        display: inline;
+        color: #303030;
+    }
+}

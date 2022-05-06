@@ -1,0 +1,52 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="."> الرئيسية</a></li>
+    <li class="breadcrumb-item" aria-current="page">الحالات</li>
+    <li class="breadcrumb-item active" aria-current="page">الحالة</li>
+  </ol>
+</nav>
+
+
+<div class="card">
+  <div class="card-body">
+    <div class="card-head text-start">
+      <h2>
+        {{kidData?.name}}
+      </h2>
+      <p>
+        <i class="far fa-calendar"></i> {{kidData?.kidnap_date}}
+      </p>
+    </div>
+
+    <div class="card-body">
+      <div class="row justify-content-between">
+        <div class="col-md-3 col-sm-12 first-cel">
+          <img src="{{kidData?.image}}" width="100%" alt="">
+        </div>
+        <div class="col-md-4 col-sm-12 second-cel" >
+          <h3 class="custom-font-weight">
+            بيانات الطفل
+          </h3>
+          <div class=" kidInfo ">
+            <label for="">الاسم :</label>
+            <p> {{kidData?.name}}</p>
+          </div>
+          <div class="kidInfo">
+            <label for="">المحافظة :</label>
+            <p> {{kidData?.city}}</p>
+          </div>
+          <div class="kidInfo">
+            <label for="">المدينة :</label>
+            <p> {{kidData?.sub_city}}</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 third-cel">
+          <h3  class="custom-font-weight">
+            بيانات ولي الامر
+          </h3>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>

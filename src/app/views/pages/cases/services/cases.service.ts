@@ -34,9 +34,23 @@ export class CasesService {
     })
   }
  
-  test()  {
+  getkids(page:number)  {
      
-    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=1`).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=${page}`).pipe(
+      tap((data:any) => {
+        
+   
+        
+
+      }),
+      map((data) => data),
+      catchError(this.handleError)  
+      )  
+  }
+
+  getsinglekid(id:number)  {
+     
+    return this.http.get<any>(this.appRoot + `admin/kids/show/${id}?user_auth_id=1`).pipe(
       tap((data:any) => {
         
    
