@@ -36,10 +36,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  testapi() {
-    this.authService.test().subscribe((d) => {
-      console.log(d);
-    });
-  }
 }
