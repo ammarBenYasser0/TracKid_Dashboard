@@ -120,12 +120,4 @@ export class AuthService {
       })
       .pipe(catchError(this.handleError));
   }
-
-  test() {
-    // let queryParams = new HttpParams();
-    // queryParams = queryParams.append('user_auth_id', 2);
-    return this.http.get<any>(`${environment.api}admin/me`, {
-      // params: queryParams,
-    });
-  }
 }

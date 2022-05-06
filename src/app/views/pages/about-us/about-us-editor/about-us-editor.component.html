@@ -1,9 +1,19 @@
-<h1 class="title">من نحن</h1>
-<form [formGroup]="aboutUsForm" (ngSubmit)="onSubmit()">
-  <quill-editor
-    formControlName="content"
-    [format]="'text'"
-    [modules]="modules"
-  ></quill-editor>
-  <button class="btn btn-primary mb-1 mb-md-0" type="submit">حفظ</button>
-</form>
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="title">من نحن</h1>
+        <form [formGroup]="aboutUsForm" (ngSubmit)="onSubmit()">
+          <quill-editor
+            formControlName="content"
+            [format]="'text'"
+            [modules]="modules"
+          ></quill-editor>
+          <button class="btn btn-primary mb-1 mb-md-0" type="submit">
+            حفظ
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

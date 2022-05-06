@@ -1,33 +1,212 @@
-<h1>مستخدمين لوحة التحكم</h1>
-<button>Add</button>
 <div class="row">
   <div class="col-md-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <!-- <h6 class="card-title">Data Table</h6> -->
+        <h1 class="d-inline-block">مستخدمين لوحة التحكم</h1>
+        <button
+          class="btn btn-primary ms-3 mb-3"
+          (click)="openModal(addModal, 0)"
+        >
+          إضافة
+          <i class="feather icon-plus-circle"></i>
+        </button>
         <div class="table-responsive">
-          <table id="dataTableExample" class="table">
+          <!-- TABLE -->
+          <table class="table table-striped">
             <thead>
               <tr>
-                <th>م</th>
-                <th>الإسم</th>
-                <th>البريد الإلكتروني</th>
-                <th>الصلاحيات</th>
-                <th>actions</th>
+                <th scope="col">م</th>
+                <th scope="col">الإسم</th>
+                <th scope="col">البريد الإلكتروني</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td><button>delete</button><button>edit</button></td>
+              <tr
+                *ngFor="let admin of admins; let i = index"
+                class="row-center"
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ admin.name }}</td>
+                <td>{{ admin.email }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary mb-1 mb-md-0"
+                    (click)="openModal(editModal, admin.id)"
+                  >
+                    تعديل
+                    <i class="feather icon-edit-3"></i>
+                  </button>
+                  |
+                  <button
+                    type="button"
+                    class="btn btn-primary mb-1 mb-md-0"
+                    (click)="onDelete(admin.id)"
+                  >
+                    حذف
+                    <i class="feather icon-trash"></i>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
+
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="collectionSize"
+              [(page)]="page"
+              [pageSize]="pageSize"
+              (pageChange)="refreshCountries(page)"
+            >
+            </ngb-pagination>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- ADD Modal -->
+<ng-template #addModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLabel">إضافة مستخدم</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close('by: close icon')"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form class="forms-sample" [formGroup]="addAdminForm">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">الإسم</label>
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          placeholder="الإسم"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >البريد الإلكتروني</label
+        >
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          placeholder="البريد الإلكتروني"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">كلمة السر</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          placeholder="كلمة السر "
+          (change)="onAddPasswordChange()"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >تأكيد كلمة السر</label
+        >
+        <input
+          formControlName="passwordConfirmation"
+          type="password"
+          class="form-control"
+          placeholder="تأكيد كلمة السر"
+          (change)="onAddPasswordChange()"
+        />
+      </div>
+      <span class="err" *ngIf="addPasswordConfirmation.hasError('mismatch')"
+        >كلمة السر غير متشابهة</span
+      >
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      [disabled]="!addAdminForm.valid"
+      type="submit"
+      class="btn btn-primary"
+      (click)="closeAddAdmin()"
+    >
+      إضافة
+    </button>
+  </div>
+</ng-template>
+
+<!-- EDIT Modal -->
+<ng-template #editModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLabel">تعديل مستخدم</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close('by: close icon')"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form class="forms-sample" [formGroup]="editAdminForm">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">الإسم</label>
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          placeholder="الإسم"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >البريد الإلكتروني</label
+        >
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          placeholder="البريد الإلكتروني"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">كلمة السر</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          placeholder="كلمة السر "
+          (change)="onEditPasswordChange()"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >تأكيد كلمة السر</label
+        >
+        <input
+          formControlName="passwordConfirmation"
+          type="password"
+          class="form-control"
+          placeholder="تأكيد كلمة السر"
+          (change)="onEditPasswordChange()"
+        />
+      </div>
+      <span class="err" *ngIf="addPasswordConfirmation.hasError('mismatch')"
+        >كلمة السر غير متشابهة</span
+      >
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      [disabled]="!editAdminForm.valid"
+      type="submit"
+      class="btn btn-primary"
+      (click)="closeEditAdmin()"
+    >
+      تعديل
+    </button>
+  </div>
+</ng-template>
