@@ -22,6 +22,7 @@ export class FaqComponent implements OnInit {
   ]
   constructor(private modalService: NgbModal, private _questionService: QuestionService, private toastService: HotToastService) {
     _questionService.getQuestion().subscribe((response) => {
+      console.log(response)
       this.faqs = response.data.data
       console.log(this.faqs)
     })
