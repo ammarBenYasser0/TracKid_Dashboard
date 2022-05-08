@@ -11,68 +11,31 @@ export const MENU: MenuItem[] = [
     link: '/dashboard',
   },
   {
-    label: 'من نحن',
-    icon: 'alert-circle',
-    link: '/about-us',
-  },
-  {
-    label: 'مستخدمي لوحة التحكم',
-    icon: 'users',
-    link: '/admins',
-  },
-
-  {
     label: 'الحالات',
-    icon: 'users',
+    icon: 'archive',
     link: '/cases',
-  },
-  {
-    label: 'الأسئلة الشائعة',
-    icon: 'help-circle',
-    link: '/general/faq'
   },
   {
     label: 'المستخدمين',
     icon: 'users',
-    link: '/general/users'
+    link: '/general/users',
+  },
+  {
+    label: 'مستخدمين لوحة التحكم',
+    icon: 'shield',
+    link: '/admins',
+  },
+  {
+    label: 'الأسئلة الشائعة',
+    icon: 'help-circle',
+    link: '/general/faq',
+  },
+  {
+    label: 'من نحن',
+    icon: 'alert-circle',
+    link: '/about-us',
   },
 
-  {
-    label: 'Web Apps',
-    isTitle: true,
-  },
-  {
-    label: 'Email',
-    icon: 'mail',
-    subItems: [
-      {
-        label: 'Inbox',
-        link: '/apps/email/inbox',
-      },
-      {
-        label: 'Read',
-        link: '/apps/email/read',
-      },
-      {
-        label: 'Compose',
-        link: '/apps/email/compose',
-      },
-    ],
-  },
-  {
-    label: 'Chat',
-    icon: 'message-square',
-    link: '/apps/chat',
-  },
-  {
-    label: 'Calendar',
-    icon: 'calendar',
-    link: '/apps/calendar',
-    badge: {
-      variant: 'primary',
-      text: 'Event',
-    },
-  },
   {
     label: 'Components',
     isTitle: true,
