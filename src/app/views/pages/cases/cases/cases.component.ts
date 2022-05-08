@@ -12,19 +12,19 @@ import { CasesService } from '../services/cases.service';
 })
 export class CasesComponent implements OnInit,OnDestroy {
   constructor(private _casesService: CasesService) {}
-  pageSize = 10;
+  pageSize = 1;
   page = 1;
   total = 10;
  
-  dataArr =  [
-    {
+  dataArr:any =  [
+    /* {
         "name": "name",
         "status": "not_found",
         "kidnap_status": "active",
         "age": 15,
         "city": "beni suef ",
         "kidnap_date": '2022/03/10'
-    }
+    } */
 ]
   responseObj:any = {
   "statues": true,
@@ -70,10 +70,10 @@ export class CasesComponent implements OnInit,OnDestroy {
 
   changePage(e:any){
     console.log(e);
-    
+    this.getData(e)
   }
-  getData(limit:number = 10 , offset:number = 0){
-    this._casesService.GetAllkidsByIndex().subscribe(res=>{
+  getData(offset:number = 1){
+    this._casesService.getkids(offset).subscribe(res=>{
       if(res.statues){
         this.dataArr = res?.data?.data;
         this.responseObj =res

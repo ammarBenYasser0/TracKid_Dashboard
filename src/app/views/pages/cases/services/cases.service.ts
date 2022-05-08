@@ -34,9 +34,9 @@ export class CasesService {
     })
   }
  
-  test()  {
+  getkids(page:number)  {
      
-    return this.http.post<any>(this.appRoot + `admin/me`,{tes:'ss'},this.httpOptions).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=${page}`).pipe(
       tap((data:any) => {
         
    
@@ -48,9 +48,9 @@ export class CasesService {
       )  
   }
 
-  test2()  {
+  getsinglekid(id:number)  {
      
-    return this.http.post<any>(this.appRoot + `admin/me`,{}).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/show/${id}?user_auth_id=1`).pipe(
       tap((data:any) => {
         
    
@@ -61,6 +61,37 @@ export class CasesService {
       catchError(this.handleError)  
       )  
   }
+
+  deleteKidCase(id:number)  {
+     
+    return this.http.get<any>(this.appRoot + `admin/kids/delete/${id}`).pipe(
+      tap((data:any) => {
+        
+   
+        
+
+      }),
+      map((data) => data),
+      catchError(this.handleError)  
+      )  
+  }
+
+
+  updateKidCase(id:number,kidnap_status:string)  {
+     
+    return this.http.get<any>(this.appRoot + `admin/kids/update/${id}?user_auth_id=1&kidnap_status=${kidnap_status}`).pipe(
+      tap((data:any) => {
+        
+   
+        
+
+      }),
+      map((data) => data),
+      catchError(this.handleError)  
+      )  
+  }
+
+  
 
   GetAllkidsByIndex(limit:number=10,offset:number=0)  {
      
