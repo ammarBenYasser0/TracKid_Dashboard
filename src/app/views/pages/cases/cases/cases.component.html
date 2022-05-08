@@ -1,14 +1,14 @@
 <div class="d-flex w-100 mb-4">
     <h1 class="title">القضايا</h1>  <button
-    (click)="getData()"
+    (click)="getData(1,currentStatus)"
     class="btn my-2 mx-4 customBTN"> <i class="fas fa-sync"></i> تحديث</button>
 </div>
  
 
 <div class="card">
     <div class="card-body">
-        <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-start">
-            <li [ngbNavItem]="1">
+        <ul ngbNav #nav="ngbNav"  (navChange)="changeTaps($event)" [activeId]="1" class="nav-tabs justify-content-start">
+            <li [ngbNavItem]="1" (change)="changeTaps($event)">
               <a ngbNavLink>الكل</a>
               <ng-template ngbNavContent>
                   <div  class="mt-3">
@@ -35,8 +35,19 @@
                          <th scope="row">{{item.kidnap_status}}</th>
                          <th scope="row">{{item.age}}</th>
                          <th scope="row">{{item.city}}</th>
-                         <th scope="row" class="pointer" [routerLink]="['/cases/allCases/single-case/'+item.id]">المزيد</th>
-                          </tr>
+                         <th scope="row" class="pointer" 
+                         [routerLink]="['/cases/allCases/single-case/'+item.id]">
+                         <button
+                         type="button"
+                         class="btn btn-primary mb-1 mb-md-0"
+                       
+                       >
+                       المزيد
+                
+                       </button>
+                        </th>
+                      
+                        </tr>
                         
                         </tbody>
                       </table>  
@@ -58,7 +69,7 @@
               
                 </ng-template>
             </li>
-            <li [ngbNavItem]="2">
+            <li [ngbNavItem]="2"  (change)="changeTaps($event)">
               <a ngbNavLink>النشطة</a>
               <ng-template ngbNavContent>
                 <div  class="mt-3">
@@ -85,7 +96,14 @@
                        <th scope="row">{{item.kidnap_status}}</th>
                        <th scope="row">{{item.age}}</th>
                        <th scope="row">{{item.city}}</th>
-                       <th scope="row" class="pointer"  [routerLink]="['/cases/allCases/single-case/'+item.id]">المزيد</th>
+                       <th scope="row" class="pointer"  [routerLink]="['/cases/allCases/single-case/'+item.id]">  <button
+                        type="button"
+                        class="btn btn-primary mb-1 mb-md-0"
+                      
+                      >
+                      المزيد
+               
+                      </button></th>
                         </tr>
                       
                       </tbody>
@@ -109,7 +127,7 @@
               </ng-template>
             </li>
          
-            <li [ngbNavItem]="3">
+            <li [ngbNavItem]="3"  (change)="changeTaps($event)">
                 <a ngbNavLink>المعلقة</a>
                 <ng-template ngbNavContent>
                     <div  class="mt-3">
@@ -135,7 +153,14 @@
                            <th scope="row">{{item.kidnap_status}}</th>
                            <th scope="row">{{item.age}}</th>
                            <th scope="row">{{item.city}}</th>
-                           <th scope="row" class="pointer"  [routerLink]="['/cases/allCases/single-case/'+item.id]">المزيد</th>
+                           <th scope="row" class="pointer"  [routerLink]="['/cases/allCases/single-case/'+item.id]">  <button
+                            type="button"
+                            class="btn btn-primary mb-1 mb-md-0"
+                          
+                          >
+                          المزيد
+                   
+                          </button></th>
                             </tr>
                           
                           </tbody>
@@ -185,7 +210,14 @@
                            <th scope="row">{{item.kidnap_status}}</th>
                            <th scope="row">{{item.age}}</th>
                            <th scope="row">{{item.city}}</th>
-                           <th scope="row" class="pointer"  [routerLink]="['/cases/allCases/single-case/'+item.id]">المزيد</th>
+                           <th scope="row" class="pointer"  [routerLink]="['/cases/allCases/single-case/'+item.id]">  <button
+                            type="button"
+                            class="btn btn-primary mb-1 mb-md-0"
+                          
+                          >
+                          المزيد
+                   
+                          </button></th>
                             
                             </tr>
                           
@@ -211,6 +243,6 @@
               </li>
           </ul>
           
-          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          <div [ngbNavOutlet]="nav"  (change)="changeTaps($event)" class="mt-2"></div>
     </div>
 </div>

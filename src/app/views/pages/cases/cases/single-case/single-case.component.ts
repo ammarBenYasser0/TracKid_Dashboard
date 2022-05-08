@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { CasesService } from '../../services/cases.service';
 
@@ -21,15 +22,34 @@ export class SingleCaseComponent implements OnInit {
   ngOnInit(): void {
     this.getData(this.id)
   }
-
+  private subscriptions = new Subscription()
   getData(id:number){
-    this._casesService.getsinglekid(id).subscribe(res=>{
-      if(res.status){
-        this.kidData = res?.data;
+    this.subscriptions.add(
+      this._casesService.getsinglekid(id).subscribe(res=>{
+        if(res.status){
+          this.kidData = res?.data;
+         
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'نأسف...',
+            text: 'لقد حدث شئ خطأ',
+            
+          })
+        }
        
-      }
+      },(error)=>{
+         
+        Swal.fire({
+          icon: 'error',
+          title: 'نأسف...',
+          text: 'لقد حدث شئ خطأ',
+          
+        })
      
     })
+      )
+
   }
 
 
@@ -44,16 +64,7 @@ export class SingleCaseComponent implements OnInit {
       cancelButtonText: 'لا تحذفها'
     }).then((result:any) => {
       if (result.isConfirmed) {
-        /* this.subscriptions.add(this._BookingService.deleteClinicOrHospital(id).subscribe(
-          (res:any) => {
-
-            this.emitEventToChild();
-            swal.fire(
-              'Deleted!',
-              'Clinic has been deleted.',
-              'success'
-            )
-          })); */
+        
           this.deleteKidCase(id)
       
       // For more information about handling dismissals please visit
@@ -72,41 +83,86 @@ export class SingleCaseComponent implements OnInit {
 
   }
   deleteKidCase(id:number){
-    this._casesService.deleteKidCase(id).subscribe(res=>{
-      if(res.status){
-      /*   this.kidData = res?.data; */
-        Swal.fire(
-          'تم الحذف',
-          '',
-          'success'
-        )
-      }
+    this.subscriptions.add(
+      this._casesService.deleteKidCase(id).subscribe(res=>{
+        if(res.status){
+   
+          Swal.fire(
+            'تم الحذف',
+            '',
+            'success'
+          )
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'نأسف...',
+            text: 'لقد حدث شئ خطأ',
+            
+          })
+        }
+       
+      },(error)=>{
+         
+        Swal.fire({
+          icon: 'error',
+          title: 'نأسف...',
+          text: 'لقد حدث شئ خطأ',
+          
+        })
      
     })
+    )
+   
   }
 
   updateKidCase(id:number,kidnap_status:string){
-    this._casesService.updateKidCase(id,kidnap_status).subscribe(res=>{
-      if(res.status){
-      /*   this.kidData = res?.data; */
-      if(kidnap_status == 'active'){
-        Swal.fire(
-          'تم التفعيل بنجاح',
-          '',
-          'success'
-        )
-      }else{
-        Swal.fire(
-          'تم الاغلاق بنجاح',
-          '',
-          'success'
-        )
-      }
+    this.subscriptions.add(
+      this._casesService.updateKidCase(id,kidnap_status).subscribe(res=>{
+        if(res.status){
+        /*   this.kidData = res?.data; */
+        if(kidnap_status == 'active'){
+          Swal.fire(
+            'تم التفعيل بنجاح',
+            '',
+            'success'
+          )
+        }else{
+          Swal.fire(
+            'تم الاغلاق بنجاح',
+            '',
+            'success'
+          )
+        }
+         
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'نأسف...',
+            text: 'لقد حدث شئ خطأ',
+            
+          })
+        }
        
-      }
-     
-    })
+      },(error)=>{
+         
+          Swal.fire({
+            icon: 'error',
+            title: 'نأسف...',
+            text: 'لقد حدث شئ خطأ',
+            
+          })
+       
+      })
+      )
+    
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscriptions.unsubscribe()
+     
+    
+  }
 
 }
