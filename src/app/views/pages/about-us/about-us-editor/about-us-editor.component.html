@@ -3,10 +3,10 @@
     <div class="card">
       <div class="card-body">
         <h1 class="title">من نحن</h1>
-        <form [formGroup]="aboutUsForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="aboutUsForm" (ngSubmit)="onUpdateAboutUs()">
           <quill-editor
-            formControlName="content"
-            [format]="'text'"
+            class="force-ltr"
+            formControlName="body"
             [modules]="modules"
           ></quill-editor>
           <button class="btn btn-primary mb-1 mb-md-0" type="submit">
