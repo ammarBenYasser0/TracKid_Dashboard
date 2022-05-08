@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
  
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
  
 import { CasesService } from '../services/cases.service';
 
@@ -12,9 +13,25 @@ import { CasesService } from '../services/cases.service';
 })
 export class CasesComponent implements OnInit,OnDestroy {
   constructor(private _casesService: CasesService) {}
-  pageSize = 1;
+  pageSize = 10;
   page = 1;
   total = 10;
+  changeTaps(e:any){
+    console.log(e);
+    if(e.nextId == 1){
+      this.getData(1,'')
+      this.currentStatus = ''
+    }else if(e.nextId == 2){
+      this.getData(1,'active')
+      this.currentStatus = 'active'
+    }else if(e.nextId == 3){
+      this.getData(1,'pending')
+      this.currentStatus = 'pending'
+    }else if(e.nextId == 4){
+      this.getData(1,'closed')
+      this.currentStatus = 'closed'
+    } 
+  }
  
   dataArr:any =  [
     /* {
@@ -27,7 +44,7 @@ export class CasesComponent implements OnInit,OnDestroy {
     } */
 ]
   responseObj:any = {
-  "statues": true,
+  /* "statues": true,
   "code": 200,
   "data": {
       "current_page": 1,
@@ -51,7 +68,7 @@ export class CasesComponent implements OnInit,OnDestroy {
       "prev_page_url": null,
       "to": 1,
       "total": 2
-  }
+  } */
 }
    private subscriptions = new Subscription()
 
@@ -60,26 +77,39 @@ export class CasesComponent implements OnInit,OnDestroy {
   });
 
   ngOnInit(): void {
-    // this.aboutUsService.getContent();
-    this.getData()
-   /* this._casesService.test().subscribe(res=>{
-     console.log(res);
-     
-   }) */
+    // Init Data
+    this.getData(1,this.currentStatus)
+ 
   }
 
+  currentStatus = ''
   changePage(e:any){
     console.log(e);
-    this.getData(e)
+    // Pagination
+    this.getData(e,this.currentStatus)
   }
-  getData(offset:number = 1){
-    this._casesService.getkids(offset).subscribe(res=>{
-      if(res.statues){
-        this.dataArr = res?.data?.data;
-        this.responseObj =res
-      }
+  getData(offset:number = 1,status:string){
+    // Make  subscription
+    this.subscriptions.add(
+      this._casesService.getkids(offset,status).subscribe(res=>{
+        if(res.statues){
+
+          this.dataArr = res?.data?.data;
+          this.responseObj =res
+        }
+       
+      },(error)=>{
+       // Error Handilling
+        Swal.fire({
+          icon: 'error',
+          title: 'نأسف...',
+          text: 'لقد حدث شئ خطأ',
+          
+        })
      
     })
+    )
+    
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

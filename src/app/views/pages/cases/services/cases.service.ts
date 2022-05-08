@@ -34,9 +34,9 @@ export class CasesService {
     })
   }
  
-  getkids(page:number)  {
+  getkids(page:number,kidnap_status = '')  {
      
-    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=${page}`).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=${page}&kidnap_status=${kidnap_status}`).pipe(
       tap((data:any) => {
         
    
