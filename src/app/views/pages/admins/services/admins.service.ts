@@ -10,6 +10,13 @@ import { AdminOpRes } from '../models/AdminOpRes';
 export class AdminsService {
   constructor(private http: HttpClient) {}
 
+  getAdmins(page = 1) {
+    let queryParams = new HttpParams().set('page', page);
+    return this.http.get<any>(`${environment.api}admin/dashboard/index`, {
+      params: queryParams,
+    });
+  }
+
   addAdmin(
     name: string,
     email: string,
@@ -34,37 +41,42 @@ export class AdminsService {
     );
   }
 
-  getAdmins(page = 1) {
-    let queryParams = new HttpParams().set('page', page);
-    return this.http.get<any>(`${environment.api}admin/dashboard/index`, {
-      params: queryParams,
-    });
-  }
-
   deleteAdmin(id: number) {
     return this.http.get<AdminOpRes>(
       `${environment.api}admin/dashboard/delete/${id}`
     );
   }
 
-  updateAdmin(
-    name: string,
-    email: string,
+  updateAdminData(name: string, email: string, id: number) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('email', email);
+    queryParams = queryParams.append('name', name);
+    queryParams = queryParams.append('permission_id', 2);
+
+    return this.http.get<AdminOpRes>(
+      `${environment.api}admin/dashboard/update/${id}`,
+      {
+        params: queryParams,
+      }
+    );
+  }
+
+  changeAdminPassword(
     password: string,
     passwordConfirmation: string,
+    email: string,
+    name: string,
     id: number
   ) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('email', email);
+    queryParams = queryParams.append('name', name);
     queryParams = queryParams.append('password', password);
     queryParams = queryParams.append(
       'password_confirmation',
       passwordConfirmation
     );
-    queryParams = queryParams.append('name', name);
     queryParams = queryParams.append('permission_id', 2);
-
-    // TODO : admin id
 
     return this.http.get<AdminOpRes>(
       `${environment.api}admin/dashboard/update/${id}`,
