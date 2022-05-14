@@ -2,7 +2,7 @@
   <div class="col-md-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <h1 class="d-inline-block">مستخدمين لوحة التحكم</h1>
+        <h2 class="d-inline-block">مستخدمين لوحة التحكم</h2>
         <button
           class="btn btn-primary ms-3 mb-3"
           (click)="onOpenModal(addModal, loadedAdmin, 'add')"
@@ -12,8 +12,8 @@
         </button>
         <div class="table-responsive">
           <!-- TABLE -->
-          <table class="table table-striped">
-            <thead>
+          <table class="table">
+            <thead class="bg-secondary bg-opacity-10">
               <tr>
                 <th scope="col">م</th>
                 <th scope="col">الإسم</th>
@@ -32,37 +32,32 @@
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary mb-1 mb-md-0"
+                    class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
                     (click)="onOpenModal(editModal, admin, 'edit')"
                   >
-                    تعديل
-                    <i class="feather icon-edit-3"></i>
+                    <i class="feather icon-edit-2"></i>
                   </button>
-                  |
                   <button
                     type="button"
-                    class="btn btn-primary mb-1 mb-md-0"
+                    class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
                     (click)="
                       onOpenModal(editPasswordModal, admin, 'editPassword')
                     "
                   >
-                    تغيير كلمة السر
                     <i class="feather icon-key"></i>
                   </button>
-                  |
                   <button
                     type="button"
-                    class="btn btn-primary mb-1 mb-md-0"
+                    class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
                     (click)="onOpenModal(deleteModal, admin, 'delete')"
                   >
-                    حذف
                     <i class="feather icon-trash"></i>
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <div class="d-flex justify-content-between p-2">
+          <div class="d-flex justify-content-center p-2">
             <ngb-pagination
               [collectionSize]="collectionSize"
               [(page)]="page"

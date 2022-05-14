@@ -4,7 +4,7 @@ import { AboutUsEditorComponent } from './about-us-editor/about-us-editor.compon
 import { RouterModule, Routes } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AboutUsService } from './about-us.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -20,7 +20,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     QuillModule.forRoot(),
     ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [AboutUsService],
+  providers: [],
 })
 export class AboutUsModule {}
