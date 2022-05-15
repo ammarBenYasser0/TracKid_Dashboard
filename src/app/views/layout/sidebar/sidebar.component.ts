@@ -22,6 +22,7 @@ import { AuthService } from '../../pages/auth/services/auth.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
+  toggleLogoutBtn = true;
   @ViewChild('sidebarToggler') sidebarToggler: ElementRef;
 
   menuItems: MenuItem[] = [];
@@ -85,6 +86,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       e.preventDefault();
       this.document.body.classList.toggle('sidebar-open');
     }
+    this.toggleLogoutBtn = !this.toggleLogoutBtn;
   }
 
   /**
