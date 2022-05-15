@@ -145,8 +145,10 @@
         </li>
       </ng-container>
 
-      <li class="nav-item">
-        <button type="button" class="logout-btn">تسجيل خروج</button>
+      <li class="nav-item" *ngIf="toggleLogoutBtn">
+        <button type="button" class="logout-btn" (click)="onLogout()">
+          تسجيل خروج
+        </button>
       </li>
     </ul>
 
