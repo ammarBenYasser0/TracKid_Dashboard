@@ -12,7 +12,7 @@
   </ol>
 </nav>
 
-<div class="card">
+<div class="card" *ngIf="!isLoading">
   <div class="card-body">
     <div class="card-head text-start">
       <h2>
@@ -22,30 +22,30 @@
     </div>
 
     <div class="card-body">
-      <div class="row justify-content-between">
+      <div class="row justify-content-around">
         <div class="col-md-3 col-sm-12 first-cel">
           <img src="{{ kidData?.image }}" width="100%" alt="" />
         </div>
         <div class="col-md-4 col-sm-12 second-cel">
           <h3 class="custom-font-weight">بيانات الطفل</h3>
-          <div class="kidInfo">
+          <div class="kidInfo"  *ngIf="kidData?.name">
             <label for="">الاسم :</label>
             <p>{{ kidData?.name }}</p>
           </div>
-          <div class="kidInfo">
+          <div class="kidInfo"  *ngIf="kidData?.city">
             <label for="">المحافظة :</label>
             <p>{{ kidData?.city }}</p>
           </div>
-          <div class="kidInfo">
+          <div class="kidInfo"  *ngIf="kidData?.sub_city">
             <label for="">المدينة :</label>
             <p>{{ kidData?.sub_city }}</p>
           </div>
-          <div class="kidInfo">
+          <div class="kidInfo"  *ngIf="kidData?.age">
             <label for="">العمر :</label>
             <p>{{ kidData?.age }}</p>
           </div>
 
-          <div class="kidInfo">
+          <div class="kidInfo" *ngIf="kidData?.id_number">
             <label for="">الرقم القومي :</label>
             <p>{{ kidData?.id_number }}</p>
           </div>
@@ -191,6 +191,79 @@
           >
             حذف
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="card" *ngIf="isLoading">
+  <div class="card-body">
+    <div class="card-head text-start">
+      <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{  height: '50px',width:'250px',display:'block'  }"
+      ></ngx-skeleton-loader>
+      <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{  height: '30px',width:'150px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <div class="card-body">
+      <div class="row justify-content-around">
+        <div class="col-md-3 col-sm-12 first-cel">
+          <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '100%',width:'100%' }"
+          ></ngx-skeleton-loader>
+        </div>
+        <div class="col-md-4 col-sm-12">
+
+          <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '40px',width:'150px',display:'block' }"
+          ></ngx-skeleton-loader>
+          
+          <ngx-skeleton-loader count="5" appearance="line"
+          [theme]="{  height: '30px',width:'100%' }"
+          ></ngx-skeleton-loader>
+          
+        </div>
+        <div class="col-md-4 col-sm-12 third-cel">
+           <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '40px',width:'150px',display:'block' }"
+          ></ngx-skeleton-loader>
+          
+          <ngx-skeleton-loader count="5" appearance="line"
+          [theme]="{  height: '30px',width:'100%' }"
+          ></ngx-skeleton-loader>
+        </div>
+
+        <div class="col-md-6 mt-4" *ngIf="kidData?.kid_image?.length > 0">
+          <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '40px',width:'150px',display:'block' }"
+          ></ngx-skeleton-loader>
+          
+          <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '300px',width:'100%' }"
+          ></ngx-skeleton-loader>
+        </div>
+        <div class="col-md-6 mt-4" *ngIf="kidData?.guardian?.length > 0">
+          <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '40px',width:'150px',display:'block' }"
+          ></ngx-skeleton-loader>
+          
+          <ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{  height: '300px',width:'100%' }"
+          ></ngx-skeleton-loader>
+        </div>
+
+        <div class="col-md-12 text-end mt-5">
+          <ngx-skeleton-loader   count="3" appearance="line"
+      [theme]="{  height: '40px',width:'100px','margin-right':'2px','margin-left':'2px' }"
+      ></ngx-skeleton-loader>
+        
         </div>
       </div>
     </div>

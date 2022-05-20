@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
     gridBorder: 'rgba(77, 138, 240, .15)',
     bodyColor: '#000',
     cardBg: '#fff',
-    fontFamily: "'Roboto', Helvetica, sans-serif",
+    fontFamily: "'Cairo', Helvetica, sans-serif",
   };
 
   /**
