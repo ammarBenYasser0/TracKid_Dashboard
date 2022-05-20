@@ -16,6 +16,7 @@ export class CasesComponent implements OnInit,OnDestroy {
   pageSize = 10;
   page = 1;
   total = 10;
+  isLoading = false;
   changeTaps(e:any){
     console.log(e);
     if(e.nextId == 1){
@@ -90,6 +91,7 @@ export class CasesComponent implements OnInit,OnDestroy {
   }
   getData(offset:number = 1,status:string){
     // Make  subscription
+    this.isLoading = true
     this.subscriptions.add(
       this._casesService.getkids(offset,status).subscribe(res=>{
         if(res.statues){
@@ -97,7 +99,7 @@ export class CasesComponent implements OnInit,OnDestroy {
           this.dataArr = res?.data?.data;
           this.responseObj =res
         }
-       
+        this.isLoading = false;
       },(error)=>{
        // Error Handilling
         Swal.fire({

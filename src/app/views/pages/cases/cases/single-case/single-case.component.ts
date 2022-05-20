@@ -22,15 +22,19 @@ export class SingleCaseComponent implements OnInit {
       this.id = params['id'];
     });
   }
+
+  isLoading = false;
   kidData: any = '';
   ngOnInit(): void {
     this.getData(this.id);
   }
   private subscriptions = new Subscription();
   getData(id: number) {
+    this.isLoading = true
     this.subscriptions.add(
       this._casesService.getsinglekid(id).subscribe(
         (res) => {
+          this.isLoading = false;
           if (res.status) {
             this.kidData = res?.data;
             this.kidData.kid_image = [

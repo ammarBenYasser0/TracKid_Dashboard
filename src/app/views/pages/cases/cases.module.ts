@@ -9,7 +9,7 @@ import { CasesRoutingModule } from './cases-routing.module';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SingleCaseComponent } from './cases/single-case/single-case.component';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
  
 @NgModule({
   declarations: [CasesComponent,SingleCaseComponent],
@@ -18,6 +18,7 @@ import { SingleCaseComponent } from './cases/single-case/single-case.component';
     CasesRoutingModule,
     NgbModule,
     NgbPaginationModule,
+    NgxSkeletonLoaderModule,
     ReactiveFormsModule,
   ],
   providers: [CasesService],
