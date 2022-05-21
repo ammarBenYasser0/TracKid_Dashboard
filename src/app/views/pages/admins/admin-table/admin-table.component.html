@@ -12,7 +12,14 @@
         </button>
         <div class="table-responsive">
           <!-- TABLE -->
-          <table class="table">
+          <div *ngIf="isLoading">
+            <ngx-skeleton-loader
+              count="8"
+              appearance="line"
+              [theme]="{ height: '50px', width: '100%' }"
+            ></ngx-skeleton-loader>
+          </div>
+          <table class="table" *ngIf="!isLoading">
             <thead class="bg-secondary bg-opacity-10">
               <tr>
                 <th scope="col">م</th>

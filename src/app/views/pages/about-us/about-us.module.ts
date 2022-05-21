@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     QuillModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
+    NgxSkeletonLoaderModule,
   ],
   providers: [],
 })
