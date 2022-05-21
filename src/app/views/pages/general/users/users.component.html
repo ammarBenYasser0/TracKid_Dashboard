@@ -23,7 +23,6 @@
                   <th>م</th>
                   <th>الإسم</th>
                   <th>البريد الإلكتروني</th>
-                  <th>رقم الهاتف</th>
                   <th></th>
                 </tr>
               </thead>
@@ -32,7 +31,6 @@
                   <td>{{ i + 1 }}</td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.email }}</td>
-                  <td>20-1123456789+</td>
                   <td>
                     <div class="d-flex">
                       <button *ngIf="item.status == 'not_active'"
