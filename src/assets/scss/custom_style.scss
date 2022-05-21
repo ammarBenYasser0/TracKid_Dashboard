@@ -1,8 +1,10 @@
- 
-.sidebar .sidebar-body .sidebar-nav {
-    list-style: none;
-    padding: 4px 25px 39px !important;
+.sidebar-nav {
+  list-style: none;
+  padding: 10px 25px 25px !important;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0%;
+  font-weight: 600;
 }
-
-
- 
