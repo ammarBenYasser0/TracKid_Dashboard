@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <h2 class="d-inline-block">الأسئلة الشائعة</h2>
+        <h2 class="d-inline-block"><strong>الأسئلة الشائعة</strong></h2>
         <button
           (click)="openBasicModal(basicModal)"
           class="btn btn-primary ms-3 mb-3"
@@ -20,13 +20,13 @@
               {{ faq.answer }}
               <div class="panelContentControll d-flex">
                 <button
-                  class="btn btn-edit mx-2 px-2 py-1 bg-success bg-opacity-25 text-success rounded"
+                  class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
                   (click)="editFaq(i, faq.id, basicModal)"
                 >
                   <i class="feather icon-edit-2"></i>
                 </button>
                 <button
-                  class="btn btn-delete px-2 py-1 bg-danger bg-opacity-25 text-danger rounded"
+                  class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
                   (click)="$event.preventDefault(); deleteQuestion(faq.id)"
                 >
                   <i class="feather icon-trash"></i>

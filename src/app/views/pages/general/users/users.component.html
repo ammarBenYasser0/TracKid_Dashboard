@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <div class="d-flex">
-            <h2>المستخدمين</h2>
+            <h2><strong>المستخدمين</strong></h2>
             <button class="btn btn-primary ms-3 mb-3" (click)="refresh()">
               تحديث
               <i class="feather icon-refresh-ccw pe-1"></i>
@@ -33,19 +33,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of users | search: term" class="row-center">
-                <td>{{ item.id }}</td>
+              <tr
+                *ngFor="let item of users | search: term; let i = index"
+                class="row-center"
+              >
+                <td>{{ i + 1 }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.email }}</td>
                 <td>20-1123456789+</td>
                 <td>
                   <div class="d-flex">
-                    <button
-                      class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
-                      (click)="$event.preventDefault()"
-                    >
-                      <i class="feather icon-edit-2"></i>
-                    </button>
                     <button
                       *ngIf="item.status == 'not_active'"
                       class="btn btn-Status me-2 px-2 py-1 bg-warning bg-opacity-10 text-warning rounded"

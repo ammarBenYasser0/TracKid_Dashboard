@@ -12,8 +12,8 @@
         </div>
         <div class="col-md-8 ps-md-0">
           <div class="auth-form-wrapper px-4 py-5">
-            <a routerLink="." class="nobleui-logo d-block mb-2"
-              >المفتش كورمبو</a
+            <a routerLink="." class="nobleui-logo d-block mb-2">
+              TTK<span>2022</span></a
             >
             <h5 class="text-muted fw-normal mb-4">تسجيل الدخول إلي حسابك</h5>
             <form
@@ -58,16 +58,13 @@
                 />
                 <label class="form-check-label" for="authCheck"> تذكرني </label>
               </div>
-              <div class="err-container">
-                <button
-                  type="submit"
-                  class="btn btn-primary me-2 mb-2 mb-md-0"
-                  [disabled]="!loginForm.valid"
-                >
-                  تسجيل دخول
-                </button>
-                <div *ngIf="errMsg" class="err">{{ errMsg }}</div>
-              </div>
+              <button
+                type="submit"
+                class="btn btn-primary me-2 mb-2 mb-md-0"
+                [disabled]="!loginForm.valid"
+              >
+                تسجيل دخول
+              </button>
             </form>
           </div>
         </div>

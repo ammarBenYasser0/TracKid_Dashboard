@@ -1,15 +1,6 @@
-.title {
-  margin-bottom: 0.5rem;
-  font-weight: 900;
-}
-
-button {
-  margin: 1rem 0;
-}
 .nav-tabs .nav-link {
- font-size: 17PX;
+  font-size: 17px;
   border: unset;
- 
 }
 .nav.nav-tabs .nav-item .nav-link {
   border-color: unset;
@@ -18,30 +9,31 @@ button {
   cursor: pointer;
 }
 .nav-link.active {
- 
   /* border-color: #dee2e6 #dee2e6 #fff; */
   border-bottom: 5px solid #3d73ff !important;
   background: unset !important;
 }
 
-.customBTN{
-  padding: 0 25px;
-  background-color: #f0f0f5;
-  font-size: 20px;
-  i{
-    font-size: 14px;
-    position: relative;
-    top: -3px;
-  }
-}
-.pointer{
+.pointer {
   cursor: pointer;
 }
-
-tr{
-  th{
-    font-weight: bold;
-    font-size: 1rem;
-    color: #303030;
+thead {
+  tr {
+    th {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #303030;
+    }
   }
+}
+tbody {
+  tr {
+    th {
+      font-weight: 500;
+    }
+  }
+}
+
+.row-center {
+  vertical-align: baseline;
 }

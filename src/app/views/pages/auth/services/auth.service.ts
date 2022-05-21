@@ -1,12 +1,8 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { authRes } from '../models/authRes.model';
 import { EncryptionService } from '../services/encryption.service';
@@ -35,19 +31,19 @@ export class AuthService {
         // this.httpOptions
       )
       .pipe(
-        catchError(this.handleError),
         tap((resData) => {
-          this.handleUserData(
-            email,
-            resData.data.user_data.id,
-            resData.data.access_token,
-            remember
-          );
+          if (resData.code == 200) {
+            this.handleUserData(
+              email,
+              resData.data.user_data.id,
+              resData.data.access_token,
+              remember
+            );
+          }
         })
       );
   }
 
-  //TODO : interceptor
   logout() {
     this.userSubject.next(null);
     localStorage.removeItem('user');
@@ -99,25 +95,11 @@ export class AuthService {
     }
   }
 
-  private handleError(err: HttpErrorResponse) {
-    let errMsg = 'حدثت مشكلة غير معروفة';
-    if (err.error.message == 'Unauthorized') {
-      errMsg = 'كلمة المرور غير صحيحة';
-    } else if (err.error.message == 'Validation error') {
-      errMsg = 'البريد الإلكتروني غير صحيح';
-    } else if (err.error.message == 'Admin Validation') {
-      errMsg = 'البريد الإلكتروني غير صحيح';
-    }
-    return throwError(errMsg);
-  }
-
   forgetPassword(email: string) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('email', email);
-    return this.http
-      .get<authRes>(`${environment.api}admin/forget-password`, {
-        params: queryParams,
-      })
-      .pipe(catchError(this.handleError));
+    return this.http.get<authRes>(`${environment.api}admin/forget-password`, {
+      params: queryParams,
+    });
   }
 }

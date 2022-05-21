@@ -2,12 +2,12 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    label: 'Dashboard',
+    label: 'الرئيسية',
     icon: 'home',
     link: '/dashboard',
   },
   {
-    label: 'الحالات',
+    label: 'القضايا',
     icon: 'archive',
     link: '/cases',
   },
