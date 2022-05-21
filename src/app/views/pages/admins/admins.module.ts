@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     NgbModule,
+    NgxSkeletonLoaderModule,
   ],
 })
 export class AdminsModule {}

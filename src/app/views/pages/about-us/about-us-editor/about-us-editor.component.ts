@@ -37,6 +37,8 @@ export class AboutUsEditorComponent implements OnInit {
     ],
   };
 
+  isLoading = true;
+
   aboutUsForm = new FormGroup({
     body: new FormControl(),
   });
@@ -51,6 +53,7 @@ export class AboutUsEditorComponent implements OnInit {
       this.aboutUsForm.patchValue({
         body: body,
       });
+      this.isLoading = false;
     });
   }
 

@@ -22,6 +22,7 @@ export class AdminTableComponent implements OnInit {
     private toastService: HotToastService
   ) {}
 
+  isLoading = true;
   ngOnInit(): void {
     this.refreshAdmins();
   }
@@ -228,6 +229,7 @@ export class AdminTableComponent implements OnInit {
       this.lastPage = resData.data.last_page;
       this.pageSize = resData.data.per_page;
       this.collectionSize = this.pageSize * this.lastPage;
+      this.isLoading = false;
     });
   }
 }
