@@ -18,7 +18,7 @@ export class CasesComponent implements OnInit,OnDestroy {
   total = 10;
   isLoading = false;
   changeTaps(e:any){
-    console.log(e);
+   
     if(e.nextId == 1){
       this.getData(1,'')
       this.currentStatus = ''
@@ -85,7 +85,7 @@ export class CasesComponent implements OnInit,OnDestroy {
 
   currentStatus = ''
   changePage(e:any){
-    console.log(e);
+ 
     // Pagination
     this.getData(e,this.currentStatus)
   }
