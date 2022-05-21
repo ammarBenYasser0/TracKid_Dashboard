@@ -2,6 +2,27 @@ import { Component, OnInit } from '@angular/core';
 
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/services/auth.service';
+import { DashboardService } from './services/dashboard.service';
+import {  ViewChild } from "@angular/core";
+
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexTooltip,
+  ApexStroke
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  tooltip: ApexTooltip;
+  dataLabels: ApexDataLabels;
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -41,18 +62,27 @@ export class DashboardComponent implements OnInit {
    * NgbDatepicker
    */
   currentDate: NgbDateStruct;
-
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>|any;
   constructor(
     private calendar: NgbCalendar,
-    private authService: AuthService
-  ) {}
+    private _dashboardService: DashboardService,
+
+  ) {
+
+  }
+
+
+  dashData :any= ''
 
   ngOnInit(): void {
     this.currentDate = this.calendar.getToday();
 
     this.customersChartOptions = getCustomerseChartOptions(this.obj);
+
     this.ordersChartOptions = getOrdersChartOptions(this.obj);
     this.growthChartOptions = getGrowthChartOptions(this.obj);
+    
     this.revenueChartOptions = getRevenueChartOptions(this.obj);
     this.monthlySalesChartOptions = getMonthlySalesChartOptions(this.obj);
     this.cloudStorageChartOptions = getCloudStorageChartOptions(this.obj);
@@ -61,6 +91,113 @@ export class DashboardComponent implements OnInit {
     if (document.querySelector('html')?.getAttribute('dir') === 'rtl') {
       this.addRtlOptions();
     }
+
+    this._dashboardService.getcontent().subscribe(res=>{
+      this.dashData = res.data;
+      let active = [];
+      let pending = [];
+      let closed = [];
+
+
+      for (let index = 0; index < 12; index++) {
+        let haveIt = false;
+        for (let i = 0; i < this.dashData.pending.length; i++) {
+          const element = this.dashData.pending[i];
+          if(index == +element.month-1){
+            haveIt =true
+            pending.push(+element.sum)
+          } 
+        }
+        if(!haveIt){
+          pending.push(0)
+        }
+      }
+      for (let index = 0; index < 12; index++) {
+
+        let haveIt = false;
+        for (let i = 0; i < this.dashData.closed.length; i++) {
+          const element = this.dashData.closed[i];
+          if(index == +element.month-1){
+            haveIt =true
+            closed.push(+element.sum)
+          } 
+        }
+        if(!haveIt){
+          closed.push(0)
+        }
+      }
+      
+     
+        for (let index = 0; index < 12; index++) {
+          let haveIt = false;
+          for (let i = 0; i < this.dashData.active.length; i++) {
+            const element = this.dashData.active[i];
+            if(index == +element.month-1){
+              haveIt =true
+              active.push(+element.sum)
+            } 
+        
+          
+            }
+            if(!haveIt){
+              active.push(0)
+            }
+        }
+        
+       
+  
+      console.log(active);
+      console.log(closed);
+      console.log(pending);
+      this.chartOptions = {
+        series: [
+          {
+            name: "الحالات النشطة",
+            data: active
+          },
+          {
+            name: "الحالات المغلقة",
+            data: closed
+          },
+          {
+            name: "الحالات المعلقة",
+            data: pending
+          }
+        ],
+        chart: {
+          height: 350,
+          type: "area"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: "smooth"
+        },
+        xaxis: {
+          type: "category",
+          categories: [
+            "يناير",
+            "فبراير",
+            "مارس",
+            "ابريل",
+            "مايو",
+            "يونيو",
+            "يوليو",
+            "اغسطس",
+            "سبتمبر",
+            "اكتوبر",
+            "نوفمبر",
+            "ديسمبر",
+          ]
+        },
+        tooltip: {
+          x: {
+            format: ""
+          }
+        }
+      };
+    })
   }
 
   /**
@@ -222,20 +359,7 @@ function getRevenueChartOptions(obj: any) {
       {
         name: 'Revenue',
         data: [
-          49.3, 48.7, 50.6, 53.3, 54.7, 53.8, 54.6, 56.7, 56.9, 56.1, 56.5,
-          60.3, 58.7, 61.4, 61.1, 58.5, 54.7, 52.0, 51.0, 47.4, 48.5, 48.9,
-          53.5, 50.2, 46.2, 48.6, 51.7, 51.3, 50.2, 54.6, 52.4, 53.0, 57.0,
-          52.9, 48.7, 52.6, 53.5, 58.5, 55.1, 58.0, 61.3, 57.7, 60.2, 61.0,
-          57.7, 56.8, 58.9, 62.4, 58.7, 58.4, 56.7, 52.7, 52.3, 50.5, 55.4,
-          50.4, 52.4, 48.7, 47.4, 43.3, 38.9, 34.7, 31.0, 32.6, 36.8, 35.8,
-          32.7, 33.2, 30.8, 28.6, 28.4, 27.7, 27.7, 25.9, 24.3, 21.9, 22.0,
-          23.5, 27.3, 30.2, 27.2, 29.9, 25.1, 23.0, 23.7, 23.4, 27.9, 23.2,
-          23.9, 19.2, 15.1, 15.0, 11.0, 9.2, 7.47, 11.6, 15.7, 13.9, 12.5, 13.5,
-          15.0, 13.9, 13.2, 18.1, 20.6, 21.0, 25.3, 25.3, 20.9, 18.7, 15.3,
-          14.5, 17.9, 15.9, 16.3, 14.1, 12.1, 14.8, 17.2, 17.7, 14.0, 18.6,
-          18.4, 22.6, 25.0, 28.1, 28.0, 24.1, 24.2, 28.2, 26.2, 29.3, 26.0,
-          23.9, 28.8, 25.1, 21.7, 23.0, 20.7, 29.7, 30.2, 32.5, 31.4, 33.6,
-          30.0, 34.2, 36.9, 35.5, 34.7, 36.9,
+          49.3, 48.7, 50.6, 53.3, 54.7, 53.8, 54.6, 56.7, 56.9, 56.1, 56.9, 56.1, 
         ],
       },
     ],
@@ -264,156 +388,18 @@ function getRevenueChartOptions(obj: any) {
     xaxis: {
       type: 'datetime',
       categories: [
-        'Jan 01 2022',
-        'Jan 02 2022',
-        'jan 03 2022',
-        'Jan 04 2022',
-        'Jan 05 2022',
-        'Jan 06 2022',
-        'Jan 07 2022',
-        'Jan 08 2022',
-        'Jan 09 2022',
-        'Jan 10 2022',
-        'Jan 11 2022',
-        'Jan 12 2022',
-        'Jan 13 2022',
-        'Jan 14 2022',
-        'Jan 15 2022',
-        'Jan 16 2022',
-        'Jan 17 2022',
-        'Jan 18 2022',
-        'Jan 19 2022',
-        'Jan 20 2022',
-        'Jan 21 2022',
-        'Jan 22 2022',
-        'Jan 23 2022',
-        'Jan 24 2022',
-        'Jan 25 2022',
-        'Jan 26 2022',
-        'Jan 27 2022',
-        'Jan 28 2022',
-        'Jan 29 2022',
-        'Jan 30 2022',
-        'Jan 31 2022',
-        'Feb 01 2022',
-        'Feb 02 2022',
-        'Feb 03 2022',
-        'Feb 04 2022',
-        'Feb 05 2022',
-        'Feb 06 2022',
-        'Feb 07 2022',
-        'Feb 08 2022',
-        'Feb 09 2022',
-        'Feb 10 2022',
-        'Feb 11 2022',
-        'Feb 12 2022',
-        'Feb 13 2022',
-        'Feb 14 2022',
-        'Feb 15 2022',
-        'Feb 16 2022',
-        'Feb 17 2022',
-        'Feb 18 2022',
-        'Feb 19 2022',
-        'Feb 20 2022',
-        'Feb 21 2022',
-        'Feb 22 2022',
-        'Feb 23 2022',
-        'Feb 24 2022',
-        'Feb 25 2022',
-        'Feb 26 2022',
-        'Feb 27 2022',
-        'Feb 28 2022',
-        'Mar 01 2022',
-        'Mar 02 2022',
-        'Mar 03 2022',
-        'Mar 04 2022',
-        'Mar 05 2022',
-        'Mar 06 2022',
-        'Mar 07 2022',
-        'Mar 08 2022',
-        'Mar 09 2022',
-        'Mar 10 2022',
-        'Mar 11 2022',
-        'Mar 12 2022',
-        'Mar 13 2022',
-        'Mar 14 2022',
-        'Mar 15 2022',
-        'Mar 16 2022',
-        'Mar 17 2022',
-        'Mar 18 2022',
-        'Mar 19 2022',
-        'Mar 20 2022',
-        'Mar 21 2022',
-        'Mar 22 2022',
-        'Mar 23 2022',
-        'Mar 24 2022',
-        'Mar 25 2022',
-        'Mar 26 2022',
-        'Mar 27 2022',
-        'Mar 28 2022',
-        'Mar 29 2022',
-        'Mar 30 2022',
-        'Mar 31 2022',
-        'Apr 01 2022',
-        'Apr 02 2022',
-        'Apr 03 2022',
-        'Apr 04 2022',
-        'Apr 05 2022',
-        'Apr 06 2022',
-        'Apr 07 2022',
-        'Apr 08 2022',
-        'Apr 09 2022',
-        'Apr 10 2022',
-        'Apr 11 2022',
-        'Apr 12 2022',
-        'Apr 13 2022',
-        'Apr 14 2022',
-        'Apr 15 2022',
-        'Apr 16 2022',
-        'Apr 17 2022',
-        'Apr 18 2022',
-        'Apr 19 2022',
-        'Apr 20 2022',
-        'Apr 21 2022',
-        'Apr 22 2022',
-        'Apr 23 2022',
-        'Apr 24 2022',
-        'Apr 25 2022',
-        'Apr 26 2022',
-        'Apr 27 2022',
-        'Apr 28 2022',
-        'Apr 29 2022',
-        'Apr 30 2022',
-        'May 01 2022',
-        'May 02 2022',
-        'May 03 2022',
-        'May 04 2022',
-        'May 05 2022',
-        'May 06 2022',
-        'May 07 2022',
-        'May 08 2022',
-        'May 09 2022',
-        'May 10 2022',
-        'May 11 2022',
-        'May 12 2022',
-        'May 13 2022',
-        'May 14 2022',
-        'May 15 2022',
-        'May 16 2022',
-        'May 17 2022',
-        'May 18 2022',
-        'May 19 2022',
-        'May 20 2022',
-        'May 21 2022',
-        'May 22 2022',
-        'May 23 2022',
-        'May 24 2022',
-        'May 25 2022',
-        'May 26 2022',
-        'May 27 2022',
-        'May 28 2022',
-        'May 29 2022',
-        'May 30 2022',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12' 
       ],
       lines: {
         show: true,
@@ -432,7 +418,7 @@ function getRevenueChartOptions(obj: any) {
     },
     yaxis: {
       title: {
-        text: 'Revenue ( $1000 x )',
+        text: 'الحالات',
         style: {
           size: 9,
           color: obj.muted,
