@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AboutUsService } from '../about-us.service';
+import { AboutUsService } from '../services/about-us.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-about-us-editor',
@@ -8,8 +9,12 @@ import { AboutUsService } from '../about-us.service';
   styleUrls: ['./about-us-editor.component.scss'],
 })
 export class AboutUsEditorComponent implements OnInit {
-  constructor(private aboutUsService: AboutUsService) {}
+  constructor(
+    private aboutUsService: AboutUsService,
+    private toastService: HotToastService
+  ) {}
 
+  // ---------------- EDITOR CONFIG ----------------
   modules = {
     toolbar: [
       ['bold', 'italic', 'underline'], // toggled buttons
@@ -32,18 +37,30 @@ export class AboutUsEditorComponent implements OnInit {
     ],
   };
 
+  isLoading = true;
+
   aboutUsForm = new FormGroup({
-    content: new FormControl(),
+    body: new FormControl(),
   });
 
   ngOnInit(): void {
-    // this.aboutUsService.getContent();
-    this.aboutUsForm.controls['content'].setValue(
-      this.aboutUsService.getContent()
-    );
+    this.refreshAboutUs();
   }
 
-  onSubmit() {
-    console.log(this.aboutUsForm.value);
+  refreshAboutUs() {
+    this.aboutUsService.getAboutUs().subscribe((resData) => {
+      const body = resData.data[0].body;
+      this.aboutUsForm.patchValue({
+        body: body,
+      });
+      this.isLoading = false;
+    });
+  }
+
+  onUpdateAboutUs() {
+    const body = this.aboutUsForm.value.body;
+    this.aboutUsService.setAboutUs(body).subscribe(() => {
+      this.toastService.success('تم تغيير من نحن بنجاح');
+    });
   }
 }

@@ -2,18 +2,25 @@
   <div class="col-md-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <h1 class="d-inline-block">مستخدمين لوحة التحكم</h1>
+        <h2 class="d-inline-block"><strong> مستخدمين لوحة التحكم </strong></h2>
         <button
           class="btn btn-primary ms-3 mb-3"
-          (click)="openModal(addModal, 0)"
+          (click)="onOpenModal(addModal, loadedAdmin, 'add')"
         >
           إضافة
           <i class="feather icon-plus-circle"></i>
         </button>
         <div class="table-responsive">
           <!-- TABLE -->
-          <table class="table table-striped">
-            <thead>
+          <div *ngIf="isLoading">
+            <ngx-skeleton-loader
+              count="8"
+              appearance="line"
+              [theme]="{ height: '50px', width: '100%' }"
+            ></ngx-skeleton-loader>
+          </div>
+          <table class="table" *ngIf="!isLoading">
+            <thead class="bg-secondary bg-opacity-10">
               <tr>
                 <th scope="col">م</th>
                 <th scope="col">الإسم</th>
@@ -32,32 +39,37 @@
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary mb-1 mb-md-0"
-                    (click)="openModal(editModal, admin.id)"
+                    class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
+                    (click)="onOpenModal(editModal, admin, 'edit')"
                   >
-                    تعديل
-                    <i class="feather icon-edit-3"></i>
+                    <i class="feather icon-edit-2"></i>
                   </button>
-                  |
                   <button
                     type="button"
-                    class="btn btn-primary mb-1 mb-md-0"
-                    (click)="onDelete(admin.id)"
+                    class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
+                    (click)="
+                      onOpenModal(editPasswordModal, admin, 'editPassword')
+                    "
                   >
-                    حذف
+                    <i class="feather icon-key"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
+                    (click)="onOpenModal(deleteModal, admin, 'delete')"
+                  >
                     <i class="feather icon-trash"></i>
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
-
-          <div class="d-flex justify-content-between p-2">
+          <div class="d-flex justify-content-center p-2">
             <ngb-pagination
               [collectionSize]="collectionSize"
               [(page)]="page"
               [pageSize]="pageSize"
-              (pageChange)="refreshCountries(page)"
+              (pageChange)="onChangePage(page)"
             >
             </ngb-pagination>
           </div>
@@ -67,7 +79,7 @@
   </div>
 </div>
 
-<!-- ADD Modal -->
+<!-- ADD MODAL -->
 <ng-template #addModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="exampleModalLabel">إضافة مستخدم</h4>
@@ -132,17 +144,17 @@
       [disabled]="!addAdminForm.valid"
       type="submit"
       class="btn btn-primary"
-      (click)="closeAddAdmin()"
+      (click)="onAddAdmin()"
     >
       إضافة
     </button>
   </div>
 </ng-template>
 
-<!-- EDIT Modal -->
+<!-- EDIT MODAL -->
 <ng-template #editModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="exampleModalLabel">تعديل مستخدم</h4>
+    <h4 class="modal-title">تعديل مستخدم</h4>
     <button
       type="button"
       class="btn-close"
@@ -153,7 +165,7 @@
   <div class="modal-body">
     <form class="forms-sample" [formGroup]="editAdminForm">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">الإسم</label>
+        <label class="form-label">الإسم</label>
         <input
           formControlName="name"
           type="text"
@@ -162,9 +174,7 @@
         />
       </div>
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label"
-          >البريد الإلكتروني</label
-        >
+        <label class="form-label">البريد الإلكتروني</label>
         <input
           formControlName="email"
           type="email"
@@ -172,31 +182,6 @@
           placeholder="البريد الإلكتروني"
         />
       </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">كلمة السر</label>
-        <input
-          formControlName="password"
-          type="password"
-          class="form-control"
-          placeholder="كلمة السر "
-          (change)="onEditPasswordChange()"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label"
-          >تأكيد كلمة السر</label
-        >
-        <input
-          formControlName="passwordConfirmation"
-          type="password"
-          class="form-control"
-          placeholder="تأكيد كلمة السر"
-          (change)="onEditPasswordChange()"
-        />
-      </div>
-      <span class="err" *ngIf="addPasswordConfirmation.hasError('mismatch')"
-        >كلمة السر غير متشابهة</span
-      >
     </form>
   </div>
   <div class="modal-footer">
@@ -204,9 +189,96 @@
       [disabled]="!editAdminForm.valid"
       type="submit"
       class="btn btn-primary"
-      (click)="closeEditAdmin()"
+      (click)="onEditAdmin()"
     >
       تعديل
+    </button>
+  </div>
+</ng-template>
+
+<!-- CHANGE PASSWORD MODAL -->
+<ng-template #editPasswordModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLabel">تغيير كلمة السر</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeEditPasswordModal()"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form class="forms-sample" [formGroup]="editPasswordForm">
+      <div class="md-3 flex" *ngIf="generatedPassword">
+        <h4>كلمة السر العشوائية</h4>
+        <p>{{ generatedPassword }}</p>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">كلمة السر</label>
+        <button
+          type="button"
+          class="btn btn-link"
+          (click)="generateRandomPassword()"
+        >
+          توليد كلمة سر عشوائية
+        </button>
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          (change)="onEditPasswordChange()"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">تأكيد كلمة السر</label>
+        <input
+          formControlName="passwordConfirmation"
+          type="password"
+          class="form-control"
+          (change)="onEditPasswordChange()"
+        />
+      </div>
+      <span class="err" *ngIf="editPasswordConfirmation.hasError('mismatch')"
+        >كلمة السر غير متشابهة</span
+      >
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      [disabled]="!editPasswordForm.valid"
+      type="submit"
+      class="btn btn-primary"
+      (click)="onPasswordChange()"
+    >
+      تغيير
+    </button>
+  </div>
+</ng-template>
+
+<!-- DELETE MODAL -->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">تعديل مستخدم</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close('by: close icon')"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      هل انت متاكد من حذف المستخدم
+      <strong>{{ loadedAdmin.name }}</strong>
+      ؟
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">
+      إلغاء
+    </button>
+    <button type="submit" class="btn btn-danger" (click)="onDeleteAdmin()">
+      حذف
     </button>
   </div>
 </ng-template>

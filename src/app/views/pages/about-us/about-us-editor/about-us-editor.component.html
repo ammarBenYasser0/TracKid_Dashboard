@@ -2,15 +2,32 @@
   <div class="col-md-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <h1 class="title">من نحن</h1>
-        <form [formGroup]="aboutUsForm" (ngSubmit)="onSubmit()">
+        <h2 class="title"><strong>من نحن</strong></h2>
+        <div *ngIf="isLoading">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            [theme]="{ height: '250px', width: '100%' }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            [theme]="{ height: '38px', width: '70px' }"
+          ></ngx-skeleton-loader>
+        </div>
+        <form
+          [formGroup]="aboutUsForm"
+          (ngSubmit)="onUpdateAboutUs()"
+          *ngIf="!isLoading"
+        >
           <quill-editor
-            formControlName="content"
-            [format]="'text'"
+            class="force-ltr"
+            formControlName="body"
             [modules]="modules"
           ></quill-editor>
           <button class="btn btn-primary mb-1 mb-md-0" type="submit">
             حفظ
+            <i class="feather icon-save"></i>
           </button>
         </form>
       </div>

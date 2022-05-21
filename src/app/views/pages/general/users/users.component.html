@@ -1,73 +1,92 @@
-<div class="d-flex justify-content-between p-4">
-    <div class="d-flex">
-        <h1>المستخدمين</h1>
-        <button class="btn btn-primary ms-3" (click)="refresh()">
-            <i class="feather icon-refresh-ccw pe-1"></i>
-            تحديث
-        </button>
-    </div>
-    <div class="form-group">
-        <input type="text" [(ngModel)]="term" class="form-control" id="InputSearch" aria-describedby="searchHelp"
-            placeholder="بحث">
-    </div>
-</div>
 <div class="row">
-    <div class="col-md-12 stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <!-- <h6 class="card-title">Data Table</h6> -->
-                <div class="table-responsive">
-                    <table id="dataTableExample" class="table">
-                        <thead>
-                            <tr>
-                                <th>م</th>
-                                <th>الإسم</th>
-                                <th>البريد الإلكتروني</th>
-                                <th>رقم الهاتف</th>
-                                <th>actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of users |search:term">
-                                <td>{{item.id}}</td>
-                                <td>{{item.name}}</td>
-                                <td>{{item.email}}</td>
-                                <td>20-1123456789+</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button
-                                            class=" btn btn-edit mx-2 px-2 py-1 bg-success bg-opacity-25 text-success rounded"
-                                            (click)="$event.preventDefault();">
-                                            <i class="feather icon-edit-2"></i>
-                                        </button>
-                                        <button *ngIf=" item.status == 'not_active'"
-                                            class="btn btn-Status me-2 px-2 py-1 bg-warning bg-opacity-25 text-warning rounded"
-                                            (click)="$event.preventDefault(); updateUserStatus('active',item.id)">
-                                            <i class="feather icon-unlock"></i>
-                                        </button>
-                                        <button *ngIf=" item.status == 'active'"
-                                            class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-25 text-secondary rounded"
-                                            (click)="$event.preventDefault(); updateUserStatus('not_active',item.id)">
-                                            <i class="feather icon-lock"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-delete px-2 py-1 bg-danger bg-opacity-25 text-danger rounded"
-                                            (click)="$event.preventDefault(); deleteUser(item.id)">
-                                            <i class="feather icon-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="pagination my-3">
-                        <ngb-pagination class="m-auto" [(page)]="page" [collectionSize]="last_page" [rotate]="true"
-                            (pageChange)="changePage($event)" aria-label="Default pagination">
-
-                        </ngb-pagination>
-                    </div>
-                </div>
-            </div>
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <h2><strong>المستخدمين</strong></h2>
+            <button class="btn btn-primary ms-3 mb-3" (click)="refresh()">
+              تحديث
+              <i class="feather icon-refresh-ccw pe-1"></i>
+            </button>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="term"
+              class="form-control"
+              id="InputSearch"
+              aria-describedby="searchHelp"
+              placeholder="بحث"
+            />
+          </div>
         </div>
+        <div class="table-responsive">
+          <table id="dataTableExample" class="table">
+            <thead class="bg-secondary bg-opacity-10">
+              <tr>
+                <th>م</th>
+                <th>الإسم</th>
+                <th>البريد الإلكتروني</th>
+                <th>رقم الهاتف</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let item of users | search: term; let i = index"
+                class="row-center"
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email }}</td>
+                <td>20-1123456789+</td>
+                <td>
+                  <div class="d-flex">
+                    <button
+                      *ngIf="item.status == 'not_active'"
+                      class="btn btn-Status me-2 px-2 py-1 bg-warning bg-opacity-10 text-warning rounded"
+                      (click)="
+                        $event.preventDefault();
+                        updateUserStatus('active', item.id)
+                      "
+                    >
+                      <i class="feather icon-unlock"></i>
+                    </button>
+                    <button
+                      *ngIf="item.status == 'active'"
+                      class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
+                      (click)="
+                        $event.preventDefault();
+                        updateUserStatus('not_active', item.id)
+                      "
+                    >
+                      <i class="feather icon-lock"></i>
+                    </button>
+                    <button
+                      class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
+                      (click)="$event.preventDefault(); deleteUser(item.id)"
+                    >
+                      <i class="feather icon-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination my-3">
+            <ngb-pagination
+              class="m-auto"
+              [(page)]="page"
+              [collectionSize]="last_page"
+              [rotate]="true"
+              (pageChange)="changePage($event)"
+              aria-label="Default pagination"
+            >
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +10,17 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastService: HotToastService
+  ) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', Validators.required),
     remember: new FormControl(),
   });
-  errMsg = null;
 
   ngOnInit(): void {
     // this.authService.autoLogin();
@@ -27,13 +30,15 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     const remember = this.loginForm.value.remember;
-    this.authService.login(email, password, remember).subscribe(
-      () => {
-        this.router.navigate(['/dashboard']);
-      },
-      (err) => {
-        this.errMsg = err;
+    this.authService.login(email, password, remember).subscribe((res) => {
+      if (res.message == 'غير مصرح لك تسجيل الدخول أعد تسجيل الدخول مرة أخري') {
+        this.toastService.error('كلمة المرور غير صحيحة');
+      } else if (res.message == 'Validation error') {
+        this.toastService.error('البريد الإلكتروني غير موجود');
+      } else {
+        this.toastService.success(res.message);
       }
-    );
+      this.router.navigate(['/dashboard']);
+    });
   }
 }
