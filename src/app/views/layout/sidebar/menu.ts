@@ -9,7 +9,7 @@ export const MENU: MenuItem[] = [
   {
     label: 'القضايا',
     icon: 'archive',
-    link: '/cases',
+    link: '/cases/allCases',
   },
   {
     label: 'المستخدمين',
