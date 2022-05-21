@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UsersService } from '../Service/users.service';
 import { HotToastService } from '@ngneat/hot-toast';
 
@@ -8,17 +8,20 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  users = [ { 'name': '', 'email': '', 'id': 0, 'status':'' }];
+  users:any = [ 
+    // { 'name': '', 'email': '', 'id': 0, 'status':'' }
+  ];
   page = 1;
   last_page: number;
   term: string;
-
+  isLoading = false;
   constructor(private _usersService: UsersService, private toastService: HotToastService) {
+    this.isLoading = true;
     _usersService.getUsers(this.page).subscribe((response) => {
       this.users = response.data.data;
       this.page = response.data.current_page;
       this.last_page = response.data.total;
-      console.log(this.users, this.last_page)
+      this.isLoading =false;
     })
   }
   /*
@@ -30,6 +33,7 @@ export class UsersComponent implements OnInit {
     this._usersService.getUsers(number).subscribe((response) => {
       this.users = response.data.data
       this.last_page = response.data.total; //To Updata Pignation After Any Operation
+      this.isLoading = false;
 
     })
   }
@@ -59,7 +63,6 @@ export class UsersComponent implements OnInit {
     this.page = e;
     this._usersService.getUsers(e).subscribe((response) => {
       this.users = response.data.data
-      console.log(this.users, this.page)
     })
     document.documentElement.scrollTop = 0 //to scroll to top 0
   }
@@ -72,6 +75,8 @@ export class UsersComponent implements OnInit {
     this.getUsers(1);
     this.term = '';
     this.page = 1;
+    this.isLoading = true;
+
   }
   /*
     ========================================
@@ -80,7 +85,6 @@ export class UsersComponent implements OnInit {
   */
   updateUserStatus(status: string, id: number) {
     this._usersService.updateUserStatus(id , status).subscribe((response)=>{
-      console.log(response.data)
       if(response.data.status == "active"){
         this.toastService.success(response.message + 'المستخدم الان نشط');
 
@@ -92,6 +96,11 @@ export class UsersComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+    // Init Data
+    // if(this.users.length > 0){
+    //   this.isLoading = true;
+    // }
+
   }
 
 }
