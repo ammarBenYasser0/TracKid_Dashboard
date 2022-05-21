@@ -146,9 +146,7 @@ export class DashboardComponent implements OnInit {
         
        
   
-      console.log(active);
-      console.log(closed);
-      console.log(pending);
+ 
       this.chartOptions = {
         series: [
           {
