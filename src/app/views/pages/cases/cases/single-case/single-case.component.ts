@@ -17,8 +17,7 @@ export class SingleCaseComponent implements OnInit {
     private router: Router
   ) {
     this.route.params.subscribe((params) => {
-      console.log(params); //log the entire params object
-      console.log(params['id']); //log the value of id
+       
       this.id = params['id'];
     });
   }

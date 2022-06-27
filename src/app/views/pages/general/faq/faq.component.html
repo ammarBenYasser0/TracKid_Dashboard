@@ -3,38 +3,36 @@
     <div class="card">
       <div class="card-body">
         <h2 class="d-inline-block"><strong>الأسئلة الشائعة</strong></h2>
-        <button
-          (click)="openBasicModal(basicModal)"
-          class="btn btn-primary ms-3 mb-3"
-        >
+        <button (click)="openBasicModal(basicModal)" class="btn btn-primary ms-3 mb-3">
           إضافة
           <i class="feather icon-plus-circle"></i>
         </button>
-        <ngb-accordion [closeOthers]="true" activeIds="faq1">
-          <ngb-panel
-            *ngFor="let faq of faqs; let i = index"
-            id="faq{{ faq.id }}"
-            title="{{ faq.question }}"
-          >
-            <ng-template ngbPanelContent>
-              {{ faq.answer }}
-              <div class="panelContentControll d-flex">
-                <button
-                  class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
-                  (click)="editFaq(i, faq.id, basicModal)"
-                >
-                  <i class="feather icon-edit-2"></i>
-                </button>
-                <button
-                  class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
-                  (click)="$event.preventDefault(); deleteQuestion(faq.id)"
-                >
-                  <i class="feather icon-trash"></i>
-                </button>
-              </div>
-            </ng-template>
-          </ngb-panel>
-        </ngb-accordion>
+        <div class="mt-3" *ngIf="!isLoading">
+          <ngb-accordion [closeOthers]="true" activeIds="faq1">
+            <ngb-panel *ngFor="let faq of faqs; let i = index" id="faq{{ faq.id }}" title="{{ faq.question }}">
+              <ng-template ngbPanelContent>
+                {{ faq.answer }}
+                <div class="panelContentControll d-flex">
+                  <button class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded"
+                    (click)="editFaq(i, faq.id, basicModal)">
+                    <i class="feather icon-edit-2"></i>
+                  </button>
+                  <button class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
+                    (click)="$event.preventDefault(); deleteQuestion(faq.id)">
+                    <i class="feather icon-trash"></i>
+                  </button>
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+
+        <div class="mt-3" *ngIf="isLoading">
+          <div class="w-100">
+            <ngx-skeleton-loader count="8" appearance="line" [theme]="{ height: '50px', width: '100%' }">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -44,54 +42,26 @@
 <ng-template #basicModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">إضافة سؤال</h5>
-    <button
-      type="button"
-      class="btn-close"
-      (click)="modal.close('by: close icon')"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-    <form
-      #Questionfrom="ngForm"
-      (ngSubmit)="addFaq(Questionfrom)"
-      novalidate
-      method="post"
-    >
+    <form #Questionfrom="ngForm" (ngSubmit)="addFaq(Questionfrom)" novalidate method="post">
       <div class="form-group">
         <label for="recipient-name" class="col-form-label">السؤال:</label>
 
-        <input
-          type="text"
-          class="form-control"
-          id="recipient-name"
-          [(ngModel)]="newQuestion.question"
-          #Question="ngModel"
-          name="Question"
-          required
-        />
+        <input type="text" class="form-control" id="recipient-name" [(ngModel)]="newQuestion.question"
+          #Question="ngModel" name="Question" required />
       </div>
       <div class="form-group">
         <label for="message-text" class="col-form-label">الجواب:</label>
-        <textarea
-          class="form-control"
-          #questionAnswer="ngModel"
-          [(ngModel)]="newQuestion.answer"
-          id="message-text"
-          name="questionAnswer"
-          rows="4"
-          required
-        ></textarea>
+        <textarea class="form-control" #questionAnswer="ngModel" [(ngModel)]="newQuestion.answer" id="message-text"
+          name="questionAnswer" rows="4" required></textarea>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      (click)="addFaq(Questionfrom)"
-      [disabled]="Questionfrom.form.invalid"
-      class="btn btn-primary d-block btn-lg w-100"
-    >
+    <button type="button" (click)="addFaq(Questionfrom)" [disabled]="Questionfrom.form.invalid"
+      class="btn btn-primary d-block btn-lg w-100">
       {{ modelBtnContext }}
     </button>
   </div>

@@ -10,6 +10,7 @@ import { NgbDropdownModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstr
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { DashboardComponent } from './dashboard.component';
+import { DashboardService } from './services/dashboard.service';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     NgbDropdownModule,
     NgbDatepickerModule,
     NgApexchartsModule
-  ]
+  ],
+  providers: [DashboardService],
 })
 export class DashboardModule { }

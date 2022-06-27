@@ -13,18 +13,21 @@ export class FaqComponent implements OnInit {
   modelBtnContext: string = 'إضافة';
   indexOfEditItem: number;
   newQuestion = { "question": "", "answer": "" }
-  faqs = [
-    {
-      "id": 1,
-      "question": "",
-      "answer": ""
-    }
+  faqs:any = [
+    // {
+    //   "id": 1,
+    //   "question": "",
+    //   "answer": ""
+    // }
   ]
+  isLoading = false;
   constructor(private modalService: NgbModal, private _questionService: QuestionService, private toastService: HotToastService) {
+    this.isLoading = true;
+
     _questionService.getQuestion().subscribe((response) => {
-      console.log(response)
-      this.faqs = response.data.data
-      console.log(this.faqs)
+      this.faqs = response.data.data;
+      this.isLoading = false;
+
     })
   }
 
@@ -93,7 +96,6 @@ export class FaqComponent implements OnInit {
   */
   editFaq(index: any, QuestionId: any, content: TemplateRef<any>) {
     this.indexOfEditItem = QuestionId;
-    console.log(this.indexOfEditItem)
     this.newQuestion = {
       "question": this.faqs[index].question,
       "answer": this.faqs[index].answer,
