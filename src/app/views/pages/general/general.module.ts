@@ -27,12 +27,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'blank-page',
+        redirectTo: 'faq',
         pathMatch: 'full',
-      },
-      {
-        path: 'blank-page',
-        component: BlankComponent,
       },
       {
         path: 'faq',

@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit , TemplateRef } from '@angular/core';
 import { UsersService } from '../Service/users.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-users',
@@ -11,11 +12,16 @@ export class UsersComponent implements OnInit {
   users:any = [ 
     // { 'name': '', 'email': '', 'id': 0, 'status':'' }
   ];
+  user:any = {}
   page = 1;
   last_page: number;
+  userId: number;
   term: string;
   isLoading = false;
-  constructor(private _usersService: UsersService, private toastService: HotToastService) {
+  isActivating = false;
+  basicModalCloseResult: string = '';
+
+  constructor(private modalService: NgbModal,private _usersService: UsersService, private toastService: HotToastService) {
     this.isLoading = true;
     _usersService.getUsers(this.page).subscribe((response) => {
       this.users = response.data.data;
@@ -42,8 +48,8 @@ export class UsersComponent implements OnInit {
     ---------------Delete User--------------
     ========================================
   */
-  deleteUser(number: number) {
-    this._usersService.deleteUser(number).subscribe();
+  deleteUser() {
+    this._usersService.deleteUser(this.user.id).subscribe();
     this._usersService.getUsers(this.page).subscribe((response) => {
       if (response.error) {
         this.toastService.error(response.error.question[0])
@@ -52,7 +58,27 @@ export class UsersComponent implements OnInit {
         this.toastService.success("لقد تم حذف المستخدم بنجاح")
       }
       this.getUsers(this.page);
+      this.modalService.dismissAll('Reason');
     })
+  }
+
+  openDeleteModal(content: TemplateRef<any> , user:any) {
+    this.user = user ;
+    this.modalService.open(content, {}).result.then((result) => {
+      this.basicModalCloseResult = "Modal closed" + result;
+    }).catch((res) => { });
+  }
+
+  openActivateModal(content: TemplateRef<any> , user:any) {
+    this.user = user ;
+    if(this.user.status == "active"){
+      this.isActivating=false
+    }else{
+      this.isActivating=true
+    }
+    this.modalService.open(content, {}).result.then((result) => {
+      this.basicModalCloseResult = "Modal closed" + result;
+    }).catch((res) => { });
   }
   /*
     ========================================
@@ -83,8 +109,13 @@ export class UsersComponent implements OnInit {
     ---------update User Status-------------
     ========================================
   */
-  updateUserStatus(status: string, id: number) {
-    this._usersService.updateUserStatus(id , status).subscribe((response)=>{
+  updateUserStatus(status: string) {
+    if(status == "active"){
+      this.isActivating=true
+    }else{
+      this.isActivating=false
+    }
+    this._usersService.updateUserStatus(this.user.id , status).subscribe((response)=>{
       if(response.data.status == "active"){
         this.toastService.success(response.message + 'المستخدم الان نشط');
 
@@ -93,6 +124,8 @@ export class UsersComponent implements OnInit {
 
       }
       this.getUsers(this.page);
+      this.modalService.dismissAll('Reason');
+
     })
   }
   ngOnInit(): void {
