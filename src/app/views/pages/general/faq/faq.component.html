@@ -18,7 +18,8 @@
                     <i class="feather icon-edit-2"></i>
                   </button>
                   <button class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
-                    (click)="$event.preventDefault(); deleteQuestion(faq.id)">
+                  (click)="openDeleteModal(deleteModal , faq.id)">
+                    <!-- (click)="$event.preventDefault(); deleteQuestion(faq.id)" -->
                     <i class="feather icon-trash"></i>
                   </button>
                 </div>
@@ -41,7 +42,8 @@
 <!-- Modal -->
 <ng-template #basicModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">إضافة سؤال</h5>
+    <h5 class="modal-title" id="exampleModalLabel" *ngIf="!isEditing">إضافة سؤال</h5>
+    <h5 class="modal-title" id="exampleModalLabel" *ngIf="isEditing">تعديل السؤال</h5>
     <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
   </div>
   <div class="modal-body">
@@ -63,6 +65,33 @@
     <button type="button" (click)="addFaq(Questionfrom)" [disabled]="Questionfrom.form.invalid"
       class="btn btn-primary d-block btn-lg w-100">
       {{ modelBtnContext }}
+    </button>
+  </div>
+</ng-template>
+
+
+<!-- DELETE MODAL -->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">حذف السؤال</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close('by: close icon') ;"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      هل تريد حقا حذف هذا السؤال ؟
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">
+      إلغاء
+    </button>
+    <button type="submit" class="btn btn-danger" (click)="deleteQuestion()"    >
+      حذف
     </button>
   </div>
 </ng-template>

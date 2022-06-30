@@ -20,7 +20,9 @@ export class FaqComponent implements OnInit {
     //   "answer": ""
     // }
   ]
+  questionId:number;
   isLoading = false;
+  isEditing = false;
   constructor(private modalService: NgbModal, private _questionService: QuestionService, private toastService: HotToastService) {
     this.isLoading = true;
 
@@ -38,7 +40,18 @@ export class FaqComponent implements OnInit {
     }
     this.modelBtnContext = 'إضافة';
     this.modalService.open(content, {}).result.then((result) => {
+      this.basicModalCloseResult = "Modal closed" + result;
+
+    }).catch((res) => { });
+    this.isEditing = false;
+
+  }
+  openDeleteModal(content: TemplateRef<any> , questionId:any) {
+
+    this.questionId = questionId;
+    this.modalService.open(content, {}).result.then((result) => {
       this.basicModalCloseResult = "Modal closed" + result
+      this.isEditing=false;
     }).catch((res) => { });
   }
   /*
@@ -81,20 +94,25 @@ export class FaqComponent implements OnInit {
             this.toastService.success(response.message)
           }
           this.getQuestion();
+          // this.isEditing=false;
+
         })
     }
     this.modalService.dismissAll('Reason');
+    this.isEditing=false;
     this.newQuestion = {
       "question": '',
       "answer": '',
     }
   }
+  
   /*
     ========================================
     ---------------Edit Question----------
     ========================================
   */
   editFaq(index: any, QuestionId: any, content: TemplateRef<any>) {
+    this.isEditing=true;
     this.indexOfEditItem = QuestionId;
     this.newQuestion = {
       "question": this.faqs[index].question,
@@ -110,8 +128,8 @@ export class FaqComponent implements OnInit {
     ---------------Delete Question----------
     ========================================
   */
-  deleteQuestion(number: number) {
-    this._questionService.deleteQuestion(number).subscribe();
+  deleteQuestion() {
+    this._questionService.deleteQuestion(this.questionId).subscribe();
     this._questionService.getQuestion().subscribe((response) => {
       if(response.error){
         this.toastService.error(response.error.question[0])
@@ -121,6 +139,7 @@ export class FaqComponent implements OnInit {
         this.toastService.success("لقد تم حذف سؤال بنجاح")
       }
       this.getQuestion();
+      this.modalService.dismissAll('Reason');
     })
 
   }

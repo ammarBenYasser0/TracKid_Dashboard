@@ -35,20 +35,20 @@
                     <div class="d-flex">
                       <button *ngIf="item.status == 'not_active'"
                         class="btn btn-Status me-2 px-2 py-1 bg-warning bg-opacity-10 text-warning rounded" (click)="
-                          $event.preventDefault();
-                          updateUserStatus('active', item.id)
+                          openActivateModal(activateModal , item)
                         ">
                         <i class="feather icon-unlock"></i>
                       </button>
                       <button *ngIf="item.status == 'active'"
                         class="btn btn-Status me-2 px-2 py-1 bg-secondary bg-opacity-10 text-secondary rounded" (click)="
-                          $event.preventDefault();
-                          updateUserStatus('not_active', item.id)
+                        openActivateModal(activateModal , item)
                         ">
+                        <!-- $event.preventDefault();
+                        updateUserStatus('not_active', item.id) -->
                         <i class="feather icon-lock"></i>
                       </button>
                       <button class="btn btn-delete px-2 py-1 bg-danger bg-opacity-10 text-danger rounded"
-                        (click)="$event.preventDefault(); deleteUser(item.id)">
+                        (click)="openDeleteModal(deleteModal , item)">
                         <i class="feather icon-trash"></i>
                       </button>
                     </div>
@@ -73,3 +73,65 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- DELETE MODAL -->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">حذف المستخدم</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close('by: close icon') ;"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      هل تريد حقا حذف هذا المستخدم ؟
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">
+      إلغاء
+    </button>
+    <button type="submit" class="btn btn-danger" (click)="deleteUser()">
+      حذف
+    </button>
+  </div>
+</ng-template>
+
+<!-- Activation MODAL -->
+<ng-template #activateModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" *ngIf="!isActivating">تعطيل حساب المستخدم</h4>
+    <h4 class="modal-title" *ngIf=" isActivating">تفعيل حساب المستخدم</h4>
+
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close('by: close icon') ;"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p *ngIf="!isActivating">
+      هل تريد حقا تعطيل هذا الحساب ؟
+    </p>
+    <p *ngIf="isActivating">
+      هل تريد حقا تفعيل هذا الحساب ؟
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">
+      إلغاء
+    </button>
+    <button type="submit" class="btn btn-warning" (click)="updateUserStatus('not_active')" *ngIf="!isActivating">
+      تعطيل
+    </button>
+    <button type="submit" class="btn bg-success" (click)="updateUserStatus('active')" *ngIf="isActivating">
+      تفعيل
+    </button>
+  </div>
+</ng-template>
