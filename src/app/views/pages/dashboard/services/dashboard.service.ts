@@ -24,7 +24,7 @@ export class DashboardService {
  
   getcontent()  {
      
-    return this.http.get<any>(this.appRoot + `admin/dashboard/content?user_auth_id=1`).pipe(
+    return this.http.get<any>(this.appRoot + `admin/dashboard/content`).pipe(
       tap((data:any) => {
         
    
