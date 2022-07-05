@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
 import { FormsModule } from '@angular/forms';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import {
   NgbAccordionModule,
@@ -26,12 +27,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'blank-page',
+        redirectTo: 'faq',
         pathMatch: 'full',
-      },
-      {
-        path: 'blank-page',
-        component: BlankComponent,
       },
       {
         path: 'faq',
@@ -55,7 +52,8 @@ const routes: Routes = [
     NgbDropdownModule,
     NgbTooltipModule,
     FormsModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgxSkeletonLoaderModule
   ],
 })
 export class GeneralModule {}
