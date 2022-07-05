@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { CasesService } from '../../services/cases.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-single-case',
@@ -14,6 +15,7 @@ export class SingleCaseComponent implements OnInit {
   constructor(
     private _casesService: CasesService,
     private route: ActivatedRoute,
+    private _sanitizer: DomSanitizer,
     private router: Router
   ) {
     this.route.params.subscribe((params) => {
@@ -22,6 +24,12 @@ export class SingleCaseComponent implements OnInit {
     });
   }
 
+
+  imgPath(base64string:string){
+    
+    return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+    + base64string);
+  }
   isLoading = false;
   kidData: any = '';
   ngOnInit(): void {
@@ -36,12 +44,13 @@ export class SingleCaseComponent implements OnInit {
           this.isLoading = false;
           if (res.status) {
             this.kidData = res?.data;
+          
             this.kidData.kid_image = [
               ...this.kidData.kid_image,
               {
                 image: this.kidData.birth_image,
               },
-              ...this.kidData.prediction_image,
+              /* ...this.kidData.prediction_image, */
             ];
           } else {
             Swal.fire({
