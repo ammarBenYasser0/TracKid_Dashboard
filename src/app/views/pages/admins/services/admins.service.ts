@@ -31,7 +31,7 @@ export class AdminsService {
       passwordConfirmation
     );
     queryParams = queryParams.append('name', name);
-    queryParams = queryParams.append('permission_id', 2);
+    queryParams = queryParams.append('permission_id', 1);
 
     return this.http.get<AddAdminRes>(
       `${environment.api}admin/dashboard/store`,
@@ -51,7 +51,7 @@ export class AdminsService {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('email', email);
     queryParams = queryParams.append('name', name);
-    queryParams = queryParams.append('permission_id', 2);
+    queryParams = queryParams.append('permission_id', 1);
 
     return this.http.get<AdminOpRes>(
       `${environment.api}admin/dashboard/update/${id}`,
@@ -76,7 +76,7 @@ export class AdminsService {
       'password_confirmation',
       passwordConfirmation
     );
-    queryParams = queryParams.append('permission_id', 2);
+    queryParams = queryParams.append('permission_id', 1);
 
     return this.http.get<AdminOpRes>(
       `${environment.api}admin/dashboard/update/${id}`,

@@ -133,6 +133,7 @@
                       class="nav-link nav-link-ref"
                       [routerLink]="subSubitem.link"
                       [routerLinkActive]="['active']"
+                      [routerLinkActiveOptions]="{ exact: true }"
                       [attr.data-parent]="subSubitem.parentId"
                     >
                       <i
