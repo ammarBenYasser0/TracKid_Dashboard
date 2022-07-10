@@ -18,13 +18,7 @@
       <h2>
         {{ kidData?.name }}
       </h2>
-<<<<<<< HEAD
-      <p *ngIf="kidData?.kidnap_date">
-        <i class="far fa-calendar"></i> {{ kidData?.kidnap_date }}
-      </p>
-=======
       <p class="mt-3" *ngIf="kidData?.kidnap_date"><i class="far fa-calendar"></i> {{ kidData?.kidnap_date }}</p>
->>>>>>> e2aa7ad4c5aa467d8a6ae21243b5548d1429b5a3
     </div>
 
     <div class="card-body">
@@ -90,7 +84,7 @@
               }}
             </p>
           </div>
-          <!--  <div class="kidInfo">
+         <!--  <div class="kidInfo">
             <p>
               {{
                 kidData?.guardian?.length > 0
@@ -100,6 +94,10 @@
             </p>
           </div> -->
         </div>
+
+    
+
+   
       </div>
       <div class="row justify-content-start">
         <div class="col-md-6 mt-4" *ngIf="kidData?.birth_image">
@@ -110,7 +108,7 @@
             style="max-height: 600px"
             alt="صوره الطفل"
           />
-          <!--  <ngb-carousel>
+        <!--  <ngb-carousel>
              <ng-template ngbSlide *ngFor="let item of kidData?.kid_image">
               <div class="picsum-img-wrapper">
                 
@@ -123,8 +121,8 @@
               </div>
              
             </ng-template> -->
-
-          <!--    <ng-template ngbSlide>
+            
+            <!--    <ng-template ngbSlide>
               <div class="picsum-img-wrapper">
                 <img [src]="images[1]" alt="Random second slide">
               </div>
@@ -144,10 +142,7 @@
             </ng-template>
           </ngb-carousel> -->
         </div>
-        <div
-          class="col-md-6 mt-4"
-          *ngIf="kidData?.guardian?.length > 0 && kidData?.guardian[0].id_image"
-        >
+        <div class="col-md-6 mt-4" *ngIf="kidData?.guardian?.length > 0 && kidData?.guardian[0].id_image">
           <h3 class="custom-font-weight">صور بطاقة ولي الامر</h3>
           <ngb-carousel>
             <ng-template ngbSlide *ngFor="let item of kidData?.guardian">
@@ -186,7 +181,14 @@
           </ngb-carousel>
         </div>
 
-        <div class="col-md-6 mt-4" *ngIf="kidData?.recognation?.length > 0">
+
+
+
+
+
+
+
+        <div class="col-md-6 mt-4" *ngIf="kidData?.recognation?.length > 0 ">
           <h3 class="custom-font-weight">صور قد تكون متشابهه</h3>
           <ngb-carousel>
             <ng-template ngbSlide *ngFor="let item of kidData?.recognation">
@@ -196,18 +198,6 @@
                   src="{{ item?.image }}"
                   width="100%"
                   style="max-height: 600px"
-<<<<<<< HEAD
-                  alt="there is no img"
-                />
-              </div>
-              <div
-                class="carousel-caption pointer"
-                [routerLink]="['/cases/allCases/single-case/' + item?.id]"
-              >
-                <h3>{{ item?.name }}</h3>
-                <!--  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> -->
-              </div>
-=======
                   alt="صوره الطفل"
                 />
               </div>
@@ -215,7 +205,6 @@
                 <h3>{{item?.name}}</h3>
                <!--  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> -->
               </div> 
->>>>>>> e2aa7ad4c5aa467d8a6ae21243b5548d1429b5a3
             </ng-template>
             <!--    <ng-template ngbSlide>
               <div class="picsum-img-wrapper">
@@ -238,31 +227,16 @@
           </ngb-carousel>
         </div>
 
-<<<<<<< HEAD
-        <div
-          class="col-md-6 mt-4"
-          *ngIf="kidData?.prediction_image?.length > 0"
-        >
-=======
 
 
 <!-- 
         <div class="col-md-6 mt-4" *ngIf="kidData?.prediction_image?.length > 0 ">
->>>>>>> e2aa7ad4c5aa467d8a6ae21243b5548d1429b5a3
           <h3 class="custom-font-weight">صور على فترات عمرية مختلفة</h3>
           <ngb-carousel>
-            <ng-template
-              ngbSlide
-              *ngFor="let item of kidData?.prediction_image"
-            >
+            <ng-template ngbSlide *ngFor="let item of kidData?.prediction_image">
               <div class="picsum-img-wrapper">
-<<<<<<< HEAD
-                <!--   <img [src]="images[0]" alt="Random first slide"> -->
-
-=======
                 
                 
->>>>>>> e2aa7ad4c5aa467d8a6ae21243b5548d1429b5a3
                 <img
                   [src]="imgPath(item?.predict_image)"
                   width="100%"
@@ -270,20 +244,10 @@
                   alt=""
                 />
               </div>
-<<<<<<< HEAD
-              <div
-                class="carousel-caption pointer"
-                [routerLink]="['/cases/allCases/single-case/' + item?.kid_id]"
-              >
-                <h3>العمر: {{ item?.age }}</h3>
-                <!--  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> -->
-              </div>
-=======
                 <div class="carousel-caption pointer" [routerLink]="['/cases/allCases/single-case/'+item?.kid_id]">
                 <h3> العمر: {{item?.age}}</h3>  
               
               </div> 
->>>>>>> e2aa7ad4c5aa467d8a6ae21243b5548d1429b5a3
             </ng-template>
             
           </ngb-carousel>
@@ -291,13 +255,14 @@
 
         <div class="col-md-12 text-end mt-5">
           <button
+       
             class="btn btn-primary ms-3 mb-3"
             (click)="updateKidCase(id, 'closed')"
           >
             اغلاق القضية
           </button>
           <button
-            *ngIf="kidData?.kidnap_status != 'active'"
+          *ngIf="kidData?.kidnap_status != 'active'"
             class="btn btn-primary ms-3 mb-3"
             (click)="updateKidCase(id, 'active')"
           >
