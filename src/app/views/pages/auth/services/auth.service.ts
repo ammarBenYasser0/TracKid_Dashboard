@@ -102,4 +102,18 @@ export class AuthService {
       params: queryParams,
     });
   }
+
+  resetPassword(token: string, password: string, passwordConfirmation: string) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('token', token);
+    queryParams = queryParams.append('password', password);
+    queryParams = queryParams.append(
+      'passwordConfirmation',
+      passwordConfirmation
+    );
+
+    return this.http.get<authRes>(`${environment.api}/admin/reset-password`, {
+      params: queryParams,
+    });
+  }
 }

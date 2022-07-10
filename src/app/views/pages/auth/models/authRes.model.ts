@@ -13,5 +13,5 @@ export interface authRes {
       permission: {};
     };
   };
-  error?: {};
+  error?: { email?: string; password: string };
 }

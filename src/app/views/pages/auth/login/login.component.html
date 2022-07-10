@@ -1,72 +1,60 @@
 <div class="row w-100 mx-0 auth-page">
-  <div class="col-md-8 col-xl-6 mx-auto">
+  <div class="col-md-4 col-xl-4 mx-auto">
     <div class="card">
       <div class="row">
-        <div class="col-md-4 pe-md-0">
-          <div
-            class="auth-side-wrapper"
-            [ngStyle]="{
-              'background-image': 'url(https://via.placeholder.com/219x452)'
-            }"
-          ></div>
-        </div>
-        <div class="col-md-8 ps-md-0">
-          <div class="auth-form-wrapper px-4 py-5">
-            <a routerLink="." class="nobleui-logo d-block mb-2">
-              TTK<span>2022</span></a
-            >
-            <h5 class="text-muted fw-normal mb-4">تسجيل الدخول إلي حسابك</h5>
-            <form
-              class="forms-sample"
-              [formGroup]="loginForm"
-              (ngSubmit)="onLogin()"
-            >
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >البريد الإلكتروني</label
-                >
-                <input
-                  formControlName="email"
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  placeholder="Email"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >كلمة المرور</label
-                >
-                <input
-                  formControlName="password"
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  autocomplete="current-password"
-                  placeholder="Password"
-                />
-                <a [routerLink]="['/auth/forget-password']"
-                  >نسيت كامة المرور؟</a
-                >
-              </div>
-              <div class="form-check mb-3">
-                <input
-                  formControlName="remember"
-                  type="checkbox"
-                  class="form-check-input"
-                  id="authCheck"
-                />
-                <label class="form-check-label" for="authCheck"> تذكرني </label>
-              </div>
-              <button
-                type="submit"
-                class="btn btn-primary me-2 mb-2 mb-md-0"
-                [disabled]="!loginForm.valid"
-              >
-                تسجيل دخول
-              </button>
-            </form>
+        <div class="auth-form-wrapper px-4 py-4">
+          <div class="logo-container">
+            <img src="assets/images/logo.svg" alt="logo" />
           </div>
+          <h5 class="fw-bolder mb-2 fs-4">تسجيل الدخول</h5>
+          <form
+            class="forms-sample"
+            [formGroup]="loginForm"
+            (ngSubmit)="onLogin()"
+          >
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >البريد الإلكتروني</label
+              >
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder="Email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >كلمة المرور</label
+              >
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                autocomplete="current-password"
+                placeholder="Password"
+              />
+              <a [routerLink]="['/auth/forget-password']">نسيت كامة المرور؟</a>
+            </div>
+            <div class="form-check mb-3">
+              <input
+                formControlName="remember"
+                type="checkbox"
+                class="form-check-input"
+                id="authCheck"
+              />
+              <label class="form-check-label" for="authCheck"> تذكرني </label>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary me-2 mb-2 mb-md-0"
+              [disabled]="!loginForm.valid"
+            >
+              تسجيل دخول
+            </button>
+          </form>
         </div>
       </div>
     </div>

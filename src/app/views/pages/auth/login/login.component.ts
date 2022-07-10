@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password, remember).subscribe((res) => {
       if (res.message == 'غير مصرح لك تسجيل الدخول أعد تسجيل الدخول مرة أخري') {
         this.toastService.error('كلمة المرور غير صحيحة');
-      } else if (res.message == 'Validation error') {
+      } else if (res.error?.email) {
         this.toastService.error('البريد الإلكتروني غير موجود');
       } else {
-        this.toastService.success(res.message);
+        this.toastService.success('مرحباً بعودتك');
       }
       this.router.navigate(['/dashboard']);
     });

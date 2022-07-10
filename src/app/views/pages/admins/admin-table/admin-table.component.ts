@@ -126,7 +126,7 @@ export class AdminTableComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-          this.toastService.error('حدث خطأ ما');
+          this.toastService.error('حدث خطأ أثناء تحديث بيانات المستخدم');
         }
       );
     this.modalService.dismissAll();
@@ -211,7 +211,7 @@ export class AdminTableComponent implements OnInit {
 
   onDeleteAdmin() {
     this.adminsService.deleteAdmin(this.loadedAdmin.id).subscribe((resData) => {
-      this.toastService.success(resData.message);
+      this.toastService.success('تم حذف المستخدم');
       this.refreshAdmins();
     });
     this.modalService.dismissAll();

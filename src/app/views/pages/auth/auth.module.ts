@@ -4,13 +4,11 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { EncryptionService } from './services/encryption.service';
-import { AuthGuard } from 'src/app/core/guard/auth.guard';
-import { AuthInterceptorService } from '../../../auth-interceptor.service';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-// import { AuthInterceptorService } from './auth-interceptor.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -30,26 +28,27 @@ const routes: Routes = [
         path: 'forget-password',
         component: ForgetPasswordComponent,
       },
+      {
+        path: 'reset-password/:token',
+        component: ResetPasswordComponent,
+      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [LoginComponent, AuthComponent, ForgetPasswordComponent],
+  declarations: [
+    LoginComponent,
+    AuthComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [
-    AuthService,
-    EncryptionService,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptorService,
-    //   multi: true,
-    // },
-  ],
+  providers: [AuthService, EncryptionService],
 })
 export class AuthModule {}

@@ -30,10 +30,10 @@
             <div class="d-flex justify-content-between align-items-baseline">
               <h6 class="card-title mb-0">اجمالي الحالات</h6>
               <div ngbDropdown class="mb-2">
-               <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton">
+                <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton">
                   <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
                 </button> -->
-              <!--   <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                <!--   <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
                   <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
                   <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
                   <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
@@ -44,7 +44,7 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2 mt-3">{{dashData?.all_count}}</h3>
+                <h3 class="mb-2 mt-3">{{ dashData?.all_count }}</h3>
                 <div class="d-flex align-items-baseline">
                   <!-- <p class="text-success">
                     <span>+3.3%</span>
@@ -57,7 +57,7 @@
                   <apx-chart
                     [series]="customersChartOptions.series"
                     [chart]="customersChartOptions.chart"
-                    [colors]="customersChartOptions.colors"
+                    [colors]="['#3d73ff']"
                     [xaxis]="customersChartOptions.xaxis"
                     [stroke]="customersChartOptions.stroke"
                     [markers]="customersChartOptions.markers"
@@ -74,7 +74,7 @@
             <div class="d-flex justify-content-between align-items-baseline">
               <h6 class="card-title mb-0">الحالات النشطة</h6>
               <div ngbDropdown class="mb-2">
-               <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton1">
+                <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton1">
                   <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
@@ -88,9 +88,9 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">{{dashData?.active_count}}</h3>
+                <h3 class="mb-2 mt-3">{{ dashData?.active_count }}</h3>
                 <div class="d-flex align-items-baseline">
-                 <!--  <p class="text-danger">
+                  <!--  <p class="text-danger">
                     <span>-2.8%</span>
                     <i data-feather="arrow-down" appFeatherIcon class="icon-sm mb-1"></i>
                   </p> -->
@@ -101,7 +101,7 @@
                   <apx-chart
                     [series]="ordersChartOptions.series"
                     [chart]="ordersChartOptions.chart"
-                    [colors]="ordersChartOptions.colors"
+                    [colors]="['#3d73ff']"
                     [plotOptions]="ordersChartOptions.plotOptions"
                     [xaxis]="ordersChartOptions.xaxis"
                   ></apx-chart>
@@ -117,7 +117,7 @@
             <div class="d-flex justify-content-between align-items-baseline">
               <h6 class="card-title mb-0">الحالات المعلقة</h6>
               <div ngbDropdown class="mb-2">
-               <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton2">
+                <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton2">
                   <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
@@ -131,9 +131,9 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">{{dashData?.pending_count}}</h3>
+                <h3 class="mb-2 mt-3">{{ dashData?.pending_count }}</h3>
                 <div class="d-flex align-items-baseline">
-                <!--   <p class="text-success">
+                  <!--   <p class="text-success">
                     <span>+2.8%</span>
                     <i data-feather="arrow-up" appFeatherIcon class="icon-sm mb-1"></i>
                   </p> -->
@@ -144,7 +144,7 @@
                   <apx-chart
                     [series]="growthChartOptions.series"
                     [chart]="growthChartOptions.chart"
-                    [colors]="growthChartOptions.colors"
+                    [colors]="['#3d73ff']"
                     [xaxis]="growthChartOptions.xaxis"
                     [stroke]="growthChartOptions.stroke"
                     [markers]="growthChartOptions.markers"
@@ -162,10 +162,10 @@
             <div class="d-flex justify-content-between align-items-baseline">
               <h6 class="card-title mb-0">الحالات المغلقة</h6>
               <div ngbDropdown class="mb-2">
-               <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton">
+                <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton">
                   <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
                 </button> -->
-              <!--   <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                <!--   <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
                   <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
                   <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
                   <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
@@ -176,7 +176,7 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2 mt-3">{{dashData?.closed_count}}</h3>
+                <h3 class="mb-2 mt-3">{{ dashData?.closed_count }}</h3>
                 <div class="d-flex align-items-baseline">
                   <!-- <p class="text-success">
                     <span>+3.3%</span>
@@ -189,7 +189,7 @@
                   <apx-chart
                     [series]="customersChartOptions.series"
                     [chart]="customersChartOptions.chart"
-                    [colors]="customersChartOptions.colors"
+                    [colors]="['#3d73ff']"
                     [xaxis]="customersChartOptions.xaxis"
                     [stroke]="customersChartOptions.stroke"
                     [markers]="customersChartOptions.markers"
@@ -202,16 +202,19 @@
       </div>
     </div>
   </div>
-</div> <!-- row -->
+</div>
+<!-- row -->
 
 <div class="row">
   <div class="col-12 col-xl-12 grid-margin stretch-card">
     <div class="card overflow-hidden">
       <div class="card-body">
-        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+        <div
+          class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3"
+        >
           <h6 class="card-title mb-0">الحالات</h6>
           <div ngbDropdown>
-           <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton3">
+            <!--  <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton3">
               <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownMenuButton3">
@@ -225,10 +228,10 @@
         </div>
         <div class="row align-items-start">
           <div class="col-md-7">
-           <!--  <p class="text-muted tx-13 mb-3 mb-md-0">Revenue is the income that a business has from its normal business activities, usually from the sale of goods and services to customers.</p> -->
+            <!--  <p class="text-muted tx-13 mb-3 mb-md-0">Revenue is the income that a business has from its normal business activities, usually from the sale of goods and services to customers.</p> -->
           </div>
           <div class="col-md-5 d-flex justify-content-md-end">
-           <!--  <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
+            <!--  <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-outline-primary">Today</button>
               <button type="button" class="btn btn-outline-primary d-none d-md-block">Week</button>
               <button type="button" class="btn btn-primary">Month</button>
@@ -237,7 +240,7 @@
           </div>
         </div>
         <div class="flot-wrapper">
-        <!--   <apx-chart
+          <!--   <apx-chart
             [series]="revenueChartOptions.series"
             [chart]="revenueChartOptions.chart"
             [colors]="revenueChartOptions.colors"
@@ -250,7 +253,7 @@
 
           <div id="chart">
             <apx-chart
-            *ngIf="chartOptions"
+              *ngIf="chartOptions"
               [series]="chartOptions?.series"
               [chart]="chartOptions?.chart"
               [xaxis]="chartOptions?.xaxis"
@@ -259,10 +262,9 @@
               [dataLabels]="chartOptions?.dataLabels"
             ></apx-chart>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-</div> <!-- row -->
- 
+</div>
+<!-- row -->

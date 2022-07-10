@@ -8,3 +8,15 @@
   margin: 0%;
   font-weight: 600;
 }
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.accordion-button {
+  background-color: #3d73ff15;
+}
+.collapsed {
+  background-color: white;
+}
