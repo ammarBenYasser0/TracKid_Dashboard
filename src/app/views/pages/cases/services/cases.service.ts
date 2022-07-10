@@ -36,7 +36,7 @@ export class CasesService {
  
   getkids(page:number,kidnap_status = '')  {
      
-    return this.http.get<any>(this.appRoot + `admin/kids/index?user_auth_id=1&page=${page}&kidnap_status=${kidnap_status}`).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/index?&page=${page}&kidnap_status=${kidnap_status}`).pipe(
       tap((data:any) => {
         
    
@@ -50,7 +50,7 @@ export class CasesService {
 
   getsinglekid(id:number)  {
      
-    return this.http.get<any>(this.appRoot + `admin/kids/show/${id}?user_auth_id=1`).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/show/${id}`).pipe(
       tap((data:any) => {
         
    
@@ -79,7 +79,7 @@ export class CasesService {
 
   updateKidCase(id:number,kidnap_status:string)  {
      
-    return this.http.get<any>(this.appRoot + `admin/kids/update/${id}?user_auth_id=1&kidnap_status=${kidnap_status}`).pipe(
+    return this.http.get<any>(this.appRoot + `admin/kids/update/${id}?kidnap_status=${kidnap_status}`).pipe(
       tap((data:any) => {
         
    
