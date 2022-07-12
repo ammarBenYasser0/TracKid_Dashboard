@@ -67,16 +67,6 @@
             </p>
           </div>
           <div class="kidInfo">
-            <label for="">العنوان :</label>
-            <p>
-              {{
-                kidData?.guardian?.length > 0
-                  ? kidData?.guardian[0].address
-                  : ""
-              }}
-            </p>
-          </div>
-          <div class="kidInfo">
             <label for="">رقم الهاتف :</label>
             <p>
               {{
@@ -86,6 +76,27 @@
               }}
             </p>
           </div>
+          <div class="kidInfo">
+            <label for="">الرقم القومي:</label>
+            <p>
+              {{
+                kidData?.guardian?.length > 0
+                  ? kidData?.guardian[0].parent_national_id
+                  : ""
+              }}
+            </p>
+          </div>
+          <div class="kidInfo">
+            <label for="">العنوان :</label>
+            <p>
+              {{
+                kidData?.guardian?.length > 0
+                  ? kidData?.guardian[0].address
+                  : ""
+              }}
+            </p>
+          </div>
+
           <!--  <div class="kidInfo">
             <p>
               {{
