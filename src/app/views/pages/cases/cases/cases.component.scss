@@ -13,7 +13,12 @@
   border-bottom: 5px solid #3d73ff !important;
   background: unset !important;
 }
-
+table{
+  min-width: 500px;
+}
+.overflow-auto{
+  overflow-x: auto;
+}
 .pointer {
   cursor: pointer;
 }
