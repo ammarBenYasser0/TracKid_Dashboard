@@ -30,7 +30,7 @@ export class FaqComponent implements OnInit {
     this.isLoading = true;
 
     _questionService.getQuestion().subscribe((response) => {
-      this.faqs = response.data.data;
+      this.faqs = response?.data?.data;
       this.isLoading = false;
     });
   }
@@ -66,7 +66,7 @@ export class FaqComponent implements OnInit {
   */
   getQuestion() {
     this._questionService.getQuestion().subscribe((response) => {
-      this.faqs = response.data.data;
+      this.faqs = response?.data?.data;
     });
   }
   /*
@@ -80,9 +80,9 @@ export class FaqComponent implements OnInit {
       this._questionService
         .addQuestion(questionAnswer, Question)
         .subscribe((response) => {
-          if (response.error.answer) {
+          if (response?.error?.answer) {
             this.toastService.error('الرجاء قم بإدخال الإجابة');
-          } else if (response.error.question) {
+          } else if (response?.error?.question) {
             this.toastService.error('الرجاء قم بإدخال السؤال');
           } else {
             this.toastService.success('تمت إضافة السؤال بنجاح');
@@ -93,8 +93,8 @@ export class FaqComponent implements OnInit {
       this._questionService
         .updateQuestion(this.indexOfEditItem, questionAnswer, Question)
         .subscribe((response) => {
-          if (response.error) {
-            this.toastService.error(response.error.question[0]);
+          if (response?.error) {
+            this.toastService.error(response?.error?.question[0]);
           } else {
             this.toastService.success('تم تعديل السؤال بنجاح');
           }
@@ -138,8 +138,8 @@ export class FaqComponent implements OnInit {
   deleteQuestion() {
     this._questionService.deleteQuestion(this.questionId).subscribe();
     this._questionService.getQuestion().subscribe((response) => {
-      if (response.error) {
-        this.toastService.error(response.error.question[0]);
+      if (response?.error) {
+        this.toastService.error(response?.error?.question[0]);
       } else {
         this.toastService.success('لقد تم حذف سؤال بنجاح');
       }
